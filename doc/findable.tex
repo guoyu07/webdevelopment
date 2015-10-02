@@ -1,0 +1,105 @@
+% !TEX TS-program = xelatex
+% !TEX encoding = UTF-8
+
+% This is a simple template for a XeLaTeX document using the "article" class,
+% with the fontspec package to easily select fonts.
+
+\documentclass[11pt,adobefonts]{article} % use larger type; default would be 10pt
+
+\usepackage{ctex}
+
+
+\usepackage{fontspec} % Font selection for XeLaTeX; see fontspec.pdf for documentation
+\defaultfontfeatures{Mapping=tex-text} % to support TeX conventions like ``---''
+\usepackage{xunicode} % Unicode support for LaTeX character names (accents, European chars, etc)
+\usepackage{xltxtra} % Extra customizations for XeLaTeX
+
+\usepackage{paralist}
+%\usepackage{xcolor}
+
+\usepackage[colorlinks=true]{hyperref}
+
+
+
+
+\setmainfont{Minion Pro} % set the main body font (\textrm), assumes Charis SIL is installed
+%\setsansfont{Deja Vu Sans}
+%\setmonofont{Deja Vu Mono}
+
+% other LaTeX packages.....
+\usepackage{geometry} % See geometry.pdf to learn the layout options. There are lots.
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+%\usepackage[parfill]{parskip} % Activate to begin paragraphs with an empty line rather than an indent
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+\title{让网站容易被发现}
+\author{一叶千鸟}
+%\date{} % Activate to display a given date or no date (if empty),
+         % otherwise the current date is printed 
+
+\begin{document}
+\maketitle
+
+%\section{}
+
+%\subsection{}
+
+第一次见到《Web标准和SEO应用实践》是在我们UCD书友会《设计沟通十器》新书发布现场，机械工业出版社的朋友还带了很多相关新书过来，当时本书中文译者李清也在场。
+
+Peter Morville在04年总结的User Experience Design中就涉及到Findable，我大概能想到些实际应用。但当真正去查找web-based findable相关技术资料做总结时，发现少的可怜，唯一亮点就是Aarron Walter写的这本《Building Findable Website》。
+
+其实本书中文名翻译仅仅用了原版书名的副标题，web standards, seo, and beyond.我想只是作者用来对Findable的补充，现在标题可能会给书留下名不符其实的传播隐患。准确的Building Findable Website可以叫《构建良好可发现性网站》，或者通俗点用本网志标题也可以。
+
+我的理解，SEF(Search Engine Friendly)与实现用户友好的可发现性、可访问性有交集，其中已包括W3C标准。只不过SEF在搜索引擎角度考虑问题，基本与书中理念相吻合。此书主要贡献，在于分别从标记语言、服务器、内容、导航、搜索等角度，做了较深入总结，所举blog例子也比较实用。涉及范畴基本可参考最后总结，有删减： 
+
+\section{Level 1}
+
+
+\begin{compactenum}
+\item 创建填补空白，与用户相关的精美原创内容；
+\item 研究目标关键字，并放置在标记内的战略位置（关键字密度不应超过7个百分点）；
+\item 使用语义的、标准兼容的代码；
+\item 满足易访问性指南，以确保内容对搜索引擎是易读的；
+\item 建立可预测、搜索引擎友好的URL；
+\item 如果可能，建立站内链接，并在其他网站上宣传你的网站；
+\item 发布robots.txt和sitemap.xml，然后将sitemap.xml通知给各大搜索引擎；
+\item 创建定制的404页，使用户能够返回；
+\item 建立HTML网站地图页面，来帮助用户和搜索引擎浏览网站；
+\item 确保JavaScript以及Flash内容不会阻止搜索引擎索引；
+\item 坚持分析成功和失败的流量；
+\end{compactenum}
+
+\section{Level 2}
+
+\begin{compactenum}
+\item 给网站添加本地搜索引擎；
+\item 用微格式使得如活动和联络方式等内容易于携带；
+\item 创建博客，有新内容通知主要的ping服务；
+\item 可能的话，用RSS聚合内容；
+\item 促进内容的病毒式交流；
+\item 优化网站性能，使其有效的索引；
+\end{compactenum}
+
+\section{Level 3}
+
+\begin{compactenum}
+\item 建立和利用邮件列表；
+\item 考虑通过Google的AdWords活动来吸引即时的流量；
+\item 通过线下媒体广告来推广你的网站；
+\end{compactenum}
+
+相对来说，我喜欢这样的行文，不是那种宏篇巨著论述一句话的风格。我认为读技术类书籍最好状态是互相切磋，拿自己总结与作者总结对比取长补短。而不是一穷二白的“接受”所述内容，别人说什么你就同意什么，没有自己见解，也没有自己思考。
+
+有些书的内容其实是模棱两可，比如讲概念肯定都希望自己创新的概念被拔高、受重视，但实际上这个概念仅仅是系统知识框架中的一小点而已。如果读者没有实践和研究积累去读书，很容易被片面知识蒙蔽更宽的视野。比如本书也不免俗的在开头就画了大大的概念图，来传达Findable有多么重要和高深，懂的人不看也自然懂，不懂的人看了更不懂。
+
+客观评价，如果聚焦在Findable概念范畴之内是本难得的好书，前提是读者必须深刻认识什么叫Findable。豆瓣上就有被标题误导的朋友说“如果是为了学习seo的话别买这本书”，虽然没有涉及任何SE的Optimization内容，但所总结SE的Friendly都具有良好可操作性，何况很多同行根本连SEO和SEF都分不清楚。
+
+\textsl{Building Findable Websites: Web Standards, SEO, and Beyond}
+
+\url{http://buildingfindablewebsites.com}
+
+
+
+
+\end{document}
