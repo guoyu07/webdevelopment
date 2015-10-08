@@ -1,0 +1,2460 @@
+\part{Configuration}
+
+
+\chapter{Overview}
+
+
+
+
+
+\chapter{httpd.conf}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+\chapter{nginx.conf}
+
+默认情况下，Nginx的配置文件nginx.conf位于Nginx安装目录的conf子目录下，在编译前的configure阶段可以通过\texttt{--conf-path}参数进行指定。
+
+nginx.conf的结构可以划分为下面的部分：
+
+\begin{lstlisting}[language=bash]
+...
+events
+{
+  ...
+}
+
+http
+{
+  ...
+  server
+  {
+    ...
+  }
+  
+  server
+  {
+    ...
+  }
+...
+}
+
+
+\end{lstlisting}
+
+\section{user}
+
+
+
+\begin{compactitem}
+\item 如果只指定用户，可以设置：
+
+\begin{lstlisting}[language=bash]
+#user nginx;
+\end{lstlisting}
+
+\item 如果同时指定用户和用户组，可以设置：
+
+\begin{lstlisting}[language=bash]
+#user nginx nginx;
+\end{lstlisting}
+\end{compactitem}
+
+
+\section{worker\_process}
+
+worker进程数一般等于CPU的总核数或总核数的两倍。
+
+\begin{lstlisting}[language=bash]
+worker_process 8;
+\end{lstlisting}
+
+
+\section{error\_log}
+
+除了可以指定错误日志的存放路径之外，还可以设置错误日志记录级别。
+
+\begin{compactitem}
+\item debug
+\item info
+\item notice
+\item warn
+\item error
+\item crit
+\end{compactitem}
+
+
+
+
+\begin{lstlisting}[language=bash]
+#error_log logs/error.log;
+#error_log logs/error.log notice;
+#error_log logs/error.log info;
+\end{lstlisting}
+
+
+
+
+\section{pid}
+
+
+pid文件的存放路径也可以在nginx.conf中指定。
+
+\begin{lstlisting}[language=bash]
+pid /var/run/nginx.pid;
+\end{lstlisting}
+
+\section{worker\_rlimit\_nofile}
+
+worker\_rlimit\_nofile可以指定文件描述符数量（例如51200）。
+
+\begin{lstlisting}[language=bash]
+worker_rlimit_nofile 51200;
+\end{lstlisting}
+
+
+\section{events}
+
+在events部分，可以指定Nginx使用的网络IO模型（例如Linux推荐使用epoll模型，FreeBSD系统则推荐使用kqueue模型）。
+
+
+
+\begin{lstlisting}[language=bash]
+events
+{
+  use epoll;
+}
+\end{lstlisting}
+
+另外，在events部分还可以设置允许的连接数，例如：
+
+
+\begin{lstlisting}[language=bash]
+events
+{
+  use epoll;
+  worker_connections 51200;
+}
+\end{lstlisting}
+
+
+\section{http}
+
+
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+  include mime.types;
+  default_type application/octet-stream;
+}
+\end{lstlisting}
+
+\subsection{charset}
+
+对于国际化网站，不能随意设置字符集，而是让开发者在HTML代码中通过<meta>标签设置。
+
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+  include mime.types;
+  default_type application/octet-stream;
+  #charset gb2312;
+  
+  server_names_hash_bucket_size 128;
+  client_header_buffer_size 32k;
+  large_client_header_buffers 4 32k;
+}
+\end{lstlisting}
+
+
+\subsection{client\_max\_body\_size}
+
+在nginx.conf中可以设置客户端能够上传的文件大小。
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+  include mime.types;
+  default_type application/octet-stream;
+  #charset gb2312;
+  
+  server_names_hash_bucket_size 128;
+  client_header_buffer_size 32k;
+  large_client_header_buffers 4 32k;
+  
+  client_max_body_size 8m;
+  sendfile on;
+  tcp_nopush on;
+  
+  #keepalive_timeout 60;
+  
+  tcp_nodelay on;
+}
+\end{lstlisting}
+
+
+\subsection{fastcgi\_*}
+
+FastCGI是语言无关的、可伸缩架构的CGI开放扩展，其主要作用是将CGI解释器进程保持在内存中来获得较高的性能，从而解决CGI解释器反复加载而导致性能低下的问题。
+
+FastCGI可以让CGI解释器驻留在内存中，并接受FPM（FastCGI进程管理器）的调度，从而实现良好的性能、伸缩性和Fail-Over等特性。
+
+下面说明FastCGI的工作原理：
+
+\begin{compactitem}
+\item FPM自身初始化，启动多个CGI解释器进程（即多个php-cgi进程）并等待来自Nginx进程的连接，而且在启动CGI解释器时可以配置是否以TCP或UNIX套接字方式启动。
+
+\item 客户端请求被传递到Nginx进程时，如果不是静态文件请求则会被Nginx进程以TCP协议或UNIX套接字方式转发到FastCGI主进程，然后FastCGI主进程会选择并连接到一个CGI解释器（子进程），Nginx进程会将CGI环境变量和标准输入发送到FastCGI子进程php-cgi。
+
+\item FastCGI子进程完成处理后将标准输出和错误信息从同一连接返回给Nginx进程。
+
+\item FastCGI子进程关闭连接时，说明请求被处理完成，然后FastCGI子进程会继续等待并处理来自FPM调度的下一个连接。
+
+如果是在一般的普通CGI模式中，CGI子进程php-cgi会就此结束，因此普通的CGI模式在处理每一个请求时都必须重新解析php.ini、重新载入全部扩展并重新初始化全部数据结构，FastCGI的引入使得上述过程只需在进程启动时处理一次，同时也使得数据库持久连接（persisten connection）可以正常工作。
+\end{compactitem}
+
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+  include mime.types;
+  default_type application/octet-stream;
+  #charset gb2312;
+  
+  server_names_hash_bucket_size 128;
+  client_header_buffer_size 32k;
+  large_client_header_buffers 4 32k;
+  
+  client_max_body_size 8m;
+  sendfile on;
+  tcp_nopush on;
+  
+  #keepalive_timeout 60;
+  
+  tcp_nodelay on;
+  
+  fastcgi_connect_timeout 300;
+  fastcgi_send_timeout 300;
+  fastcgi_read_timeout 300;
+  fastcgi_buffer_size 64k;
+  fastcgi_buffers 4 64k;
+  fastcgi_busy_buffers_size 128k;
+  fastcgi_temp_file_write_size 128k;
+}
+\end{lstlisting}
+
+
+
+\subsection{gzip\_*}
+
+
+gzip压缩
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+  include mime.types;
+  default_type application/octet-stream;
+  #charset gb2312;
+  
+  server_names_hash_bucket_size 128;
+  client_header_buffer_size 32k;
+  large_client_header_buffers 4 32k;
+  
+  client_max_body_size 8m;
+  sendfile on;
+  tcp_nopush on;
+  
+  #keepalive_timeout 60;
+  
+  tcp_nodelay on;
+  
+  fastcgi_connect_timeout 300;
+  fastcgi_send_timeout 300;
+  fastcgi_read_timeout 300;
+  fastcgi_buffer_size 64k;
+  fastcgi_buffers 4 64k;
+  fastcgi_busy_buffers_size 128k;
+  fastcgi_temp_file_write_size 128k;
+  
+  gzip on;
+  gzip_min_length 1k;
+  gzip_buffers 4 16k;
+  gzip_http_version 1.1;
+  gzip_comp_level 2;
+  gzip_types text/plain application/x-javascript text/css application/xml;
+  gzip_vary on;
+}
+\end{lstlisting}
+
+\subsection{limit\_zone}
+
+
+
+\begin{lstlisting}[language=bash]
+#limit_zone crawler $binary_remote_addr 10m;
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+\subsection{server}
+
+
+
+
+Nginx的server块基本等同于Apache的virtual hosts，因此可以通过server块设置来配置Nginx虚拟主机。
+
+
+
+\begin{lstlisting}[language=bash]
+server
+{
+  listen 80;
+  server_name www.youdomain.com yourdomain.com;
+  index index.html index.htm;
+  root /etc/nginx/html;
+  
+  #limit_conn crawler 20;
+  
+  location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+  {
+    expires 30d;
+  }
+  
+  location ~ .*\.(js|css)?$
+  {
+    expires 1h;
+  }
+  
+  log_format access '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" $http_x_forwarded_for';
+  access_log /var/log/nginx/access.log access;  
+}
+\end{lstlisting}
+
+
+默认情况下，Nginx只能处理静态网页，因此需要设置Nginx对PHP等动态网页的支持。
+
+
+
+\begin{lstlisting}[language=bash]
+server {
+    listen       80;
+    server_name  server-ip;
+ 
+    root   /usr/share/nginx/html;
+    index index.php index.html index.htm;
+ 
+    location / {
+        try_files $uri $uri/ =404;
+    }
+    error_page 404 /404.html;
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+ 
+    location ~ \.php$ {
+        try_files $uri =404;
+        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+        fastcgi_index index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+}
+\end{lstlisting}
+
+在设置Nginx的虚拟主机以及对PHP的支持后，同样需要重启Nginx服务器来使修改生效。
+
+\begin{lstlisting}[language=bash]
+$ sudo systemctl restart nginx.service
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\section{virtual host}
+
+虚拟主机（virtual host）技术基于特殊的软硬件技术来将物理主机划分为多台“虚拟”的主机，而且每台虚拟主机都可以是一个独立的网站，并且可以具有独立的域名以及完整的Internet服务器功能（例如WWW、FTP和Email等）。
+
+同一台物理主机上虚拟主机之间是完全独立的，从网站的访问者看来，每一台虚拟主机和一台独立的物理主机完全一样。
+
+Nginx和Apache等可以通过虚拟主机来为每一个要运行的网站提供一台单独的“服务器”，而且虚拟主机之间共享一组Nginx进程，这样就可以在同一台物理主机上的同一组Nginx进程上运行多个网站。
+
+首先，Nginx配置文件中的一个最简化的虚拟主机配置结构如下：
+
+\begin{lstlisting}[language=bash]
+http
+{
+	server
+	{
+		listen  80;
+		server_name  _ *;
+		access_log /var/log/nginx/access.log combined;
+		location /
+		{
+			index index.html index.htm;
+			root /etc/nginx/html;
+		}
+	}
+}
+\end{lstlisting}
+
+
+其次，用户可以基于IP来配置虚拟主机，也可以基于域名配置虚拟主机，还可以基于端口来配置虚拟主机。
+
+\subsection{Domain}
+
+
+在配置基于域名的虚拟主机时，只需要在DNS服务器上将每个域名对应的主机名映射到正确的IP地址，然后配置Nginx服务器来识别不同的主机名。
+
+
+基于域名的虚拟主机的好处在于可以让多个虚拟主机共享同一个IP地址，从而解决IP地址不足的问题。
+
+\begin{compactitem}
+\item index项指定了默认的首页文件，顺序从左到右，如果找不到第一个文件，则查找第二个文件作为首页，依次类推。
+\item server\_name项指定了对域名的访问规则，如果找不到精确匹配的域名，则查找支持泛域名匹配的虚拟主机，并由它来处理请求。
+\end{compactitem}
+
+\begin{lstlisting}[language=bash]
+user nginx;
+worker_processes 8;
+error_log /var/nginx/logs/error.log;
+error_log /var/nginx/logs/error.log notice;
+error_log /var/nginx/logs/error.log info;
+
+pid /var/run/nginx.pid;
+
+worker_rlimit_nofile 51200;
+
+events
+{
+	worker_connections 1024;
+}
+
+http
+{
+	include mime.types;
+	default_type application/octet-stream;
+	
+	#log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+	#	'$status $body_bytes_sent "$http_referer" '
+	#	'"$http_user_agent" "$http_x_forwarded_for"';
+	
+	#access_log /var/log/nginx/access.log main;
+	
+	send_file on;
+	#tcp_nopush on;
+	
+	keepalive_timeout 65;	
+	gzip on;
+	gzip_min_length 1100;
+	gzip_buffers 4 8k;
+	gzip_types text/plain text/css application/x-javascript;
+	gzip_com_level 4;
+	
+	server_tokens off;
+	underscores_in_headers on;
+	server
+	{
+		listen 80;
+		server_name test.com;
+		
+		#charset koi8-r;
+		#access_log /var/log/nginx/access.log main;
+		#underscores_in_headers on;
+		
+		location /
+		{
+			root /etc/nginx/html;
+			index index.html index.htm index.php;
+			if(!-e $request_filename){
+				rewrite ^/(.*)$ /index.php/$1 last;
+			}
+		}
+		
+		#error_page 404 /404.htm;
+		# redirect server error pages to the static page /50x.html
+		error_page 500 502 503 504 /50x.html;
+		location = /50x.html {
+			root html;
+		}
+		
+		# proxy the PHP scripts to Apache listening on 127.0.0.1:80
+		#
+		#location ~ \.php$ {
+		#	proxy_pass http://127.0.0.1;
+		#}
+		
+		# pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+		#
+		location ~ \.php {
+			root /etc/nginx/html;
+			fastcgi_pass 127.0.0.1:9000;
+			fastcgi_index index.php;
+			#fastcgi_param SCRIPT_FILENAME /scripts$fastcgi_script_name;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			send_timeout 60;
+			include fastcgi_params;
+		}
+		
+		# deny access to .htaccess files, if Apache's document root
+		# concurs with nginx's one
+		# 
+		#location ~ /\.ht {
+		#	deny all;
+		#}
+	}
+}
+\end{lstlisting}
+
+不同的虚拟主机可以使用不同的日志文件来记录访问日志。
+
+
+\subsection{IP Addr}
+
+Linux和FreeBSD等操作系统都允许添加IP别名，IP别名就是在同一块物理网卡上绑定多个IP地址，这样就可以在使用单一网卡的同一台服务器上运行多个基于IP的虚拟主机。
+
+设置IP别名就是使用网络配置工具ifconfig和route等工具来配置系统上的网络接口来让其监听额外的IP地址。
+
+
+
+\begin{lstlisting}[language=bash]
+# ifconfig
+eth0      Link encap:Ethernet  HWaddr 00:16:3E:00:79:90  
+          inet addr:10.168.8.66  Bcast:10.168.15.255  Mask:255.255.248.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:31996368 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:145210 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:1351005648 (1.2 GiB)  TX bytes:12348718 (11.7 MiB)
+          Interrupt:145 
+
+eth1      Link encap:Ethernet  HWaddr 00:16:3E:00:7C:0C  
+          inet addr:121.40.126.146  Bcast:121.40.127.255  Mask:255.255.252.0
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:327532453 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1874590 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:14984090397 (13.9 GiB)  TX bytes:516587686 (492.6 MiB)
+          Interrupt:144 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:463875002 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:463875002 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:222067269546 (206.8 GiB)  TX bytes:222067269546 (206.8 GiB)
+\end{lstlisting}
+
+其中，lo（local loopback，本地回环）代表本地虚拟接口，默认被看作是永远不会宕掉的接口，其主要作用有两个：
+
+\begin{compactitem}
+\item 测试本机的网络配置，例如\texttt{ping 127.0.0.1}测试本地网卡和网络协议安装是否成功。
+\item 某些server/client程序在运行时需要请求server端的资源，如果server的IP地址设置为127.0.0.1则可以请求本地资源。
+\end{compactitem}
+
+下面的命令在网卡设备eth0上添加两个IP别名（192.168.8.43和192.168.8.44）：
+
+
+\begin{lstlisting}[language=bash]
+# /sbin/ifconfig eth0:1 192.168.8.43 broadcast 192.168.8.255 netmask 255.255.255.0 up
+# /sbin/route add -host 192.168.8.43 dev eth0:1
+
+# /sbin/ifconfig eth0:2 192.168.8.44 broadcast 192.168.8.255 netmask 255.255.255.0 up
+# /sbin/route add -host 192.168.8.44 dev eth0:2
+\end{lstlisting}
+
+为了防止上述配置在重启后失效，可以将其加入到/etc/rc.local，这样系统重启时就会自动执行上述命令来设置IP别名。
+
+
+
+\begin{lstlisting}[language=bash]
+# vim /etc/rc.local
+/sbin/ifconfig eth0:1 192.168.8.43 broadcast 192.168.8.255 netmask 255.255.255.0 up
+/sbin/route add -host 192.168.8.43 dev eth0:1
+/sbin/ifconfig eth0:2 192.168.8.44 broadcast 192.168.8.255 netmask 255.255.255.0 up
+/sbin/route add -host 192.168.8.44 dev eth0:2
+\end{lstlisting}
+
+实际上，无论是通过IP别名在一台服务器上配置多个IP地址，还是通过多个网卡来配置多个IP别名，Nginx都可以支持配置成基于IP的虚拟主机。
+
+
+
+
+\begin{lstlisting}[language=bash]
+http
+{
+	# vhost0
+	server
+	{
+		listen 192.168.8.43:80;
+		server_name 192.168.8.43;
+		access_log /var/log/nginx/vhost0.log combined;
+		location /
+		{
+			index index.html index.htm;
+			root /etc/nginx/vhost0;
+		}
+	}
+	
+	#vhost2
+	server
+	{
+		listen 192.168.8.44:80;
+		server_name 192.168.8.44;
+		access_log /var/log/nginx/vhost1.log combined;
+		location /
+		{
+			index index.html index.htm;
+			root /etc/nginx/vhost1;
+		}
+	}
+}
+\end{lstlisting}
+
+注意，监听的IP和端口也可以不指定IP地址，只指定端口。例如，\texttt{listen 80;}代表监听该服务器上所有IP的80端口，可以通过server\_name区分不同的虚拟主机。
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+\section{access\_log}
+
+
+与Nginx的日志相关的指令主要是log\_format和access\_log，其中：
+
+\begin{compactitem}
+\item log\_format用来设置日志的格式；
+\item access\_log用来指定日志文件的存放路径、格式和缓存大小。
+\end{compactitem}
+
+
+log\_format和access\_log配置项的位置可以在\texttt{http\{...\}}内部，也可以在虚拟主机内部（即\texttt{server\{...\}}）。
+
+
+\subsection{log\_format}
+
+
+log\_format指令用来设置日志的记录格式，其语法如下：
+
+
+\begin{lstlisting}[language=bash]
+Syntax:	log_format name string ...;
+Default:	log_format combined "...";
+Context:	http
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item name表示定义的格式名称；
+\item format表示定义的格式样式。
+\end{compactitem}
+
+log\_format的默认的无需设置的combined日志格式设置，相当于Apache的combined日志格式，其具体参数如下：
+
+
+
+\begin{lstlisting}[language=bash]
+log_format combined '$remote_addr - $remote_user [$time_local] '
+                    '"$request" $status $body_bytes_sent '
+                    '"$http_referer" "$http_user_agent"';
+\end{lstlisting}
+
+
+用户可以自定义日志的记录格式，只要log\_format指令设置的name名称在nginx.conf中不重复即可。
+
+在生产环境中，Nginx服务器通常位于负载均衡设备、squid和Nginx反向代理之后，那么就无法获得客户端的真实IP地址。
+
+反向代理作为客户端和Nginx服务器之间的中间层导致Nginx服务器无法直接获得客户端的IP，而且\$remote\_addr变量拿到的也只是反向代理服务器的IP地址，但是可以在反向代理服务器的转发请求的HTTP头信息中增加X-Forwarded-For信息，这样就可以记录原有的客户端IP地址和原有的客户端请求的服务器地址。
+
+下面在log\_format指令中设置日志格式，并且让日志记录X-Forwarded-For信息中的IP地址（即客户端的真实IP地址）。
+
+\begin{lstlisting}[language=bash]
+log_format mylogformat '$http_x_forwarded_for - $remote_user [$time_local] '
+			'"$request" $status $body_bytes_sent '
+			'"$http_referer" "$http_user_agent"';
+\end{lstlisting}
+
+\begin{compactitem}
+\item 变量\texttt{\$remote\_addr}记录IP地址；
+\item 变量\texttt{\$http\_x\_forwarded\_for}记录IP地址；
+\item 变量\texttt{\$remote\_user}记录远程客户端用户名称；
+\item 变量\texttt{\$time\_local}记录访问时间和时区；
+\item 变量\texttt{\$request}记录请求URL和HTTP协议；
+\item 变量\texttt{\$status}记录请求状态，例如200代表请求成功；
+\item 变量\texttt{\$body\_bytes\_sent}记录发送给客户端的文件主体内容大小；
+\item 变量\texttt{\$http\_referer}记录跳转过来之前的页面链接；
+\item 变量\texttt{\$http\_user\_agent}记录客户端浏览器的相关信息。
+\end{compactitem}
+
+
+
+\subsection{access\_log}
+
+
+access\_log指令指定日志文件的存放路径，其语法如下：
+
+
+
+\begin{lstlisting}[language=bash]
+Syntax:	access_log path [format [buffer=size [flush=time]] [if=condition]];
+access_log path format gzip[=level] [buffer=size] [flush=time] [if=condition];
+access_log syslog:server=address[,parameter=value] [format [if=condition]];
+access_log off;
+Default:	access_log logs/access.log combined;
+Context:	http, server, location, if in location, limit_except
+\end{lstlisting}
+
+\begin{compactitem}
+\item path表示日志文件的存放路径；
+\item format表示使用log\_format指令设置的日志格式的名称；
+\item buffer表示设置的内存缓冲区的大小（例如\texttt{buffer=32k}）。
+\end{compactitem}
+
+\begin{compactenum}
+\item 如果不需要记录日志，可以关闭日志记录。
+
+\begin{lstlisting}[language=bash]
+access_log off;
+\end{lstlisting}
+
+\item 如果需要默认的combined格式的日志记录，可以设置：
+
+\begin{lstlisting}[language=bash]
+access_log /var/log/nginx/access.log
+\end{lstlisting}
+
+或
+
+\begin{lstlisting}[language=bash]
+access_log /var/log/nginx/access.log combined;
+\end{lstlisting}
+
+\item 如果需要使用自定义格式的日志记录，可以设置：
+
+\begin{lstlisting}[language=bash]
+log_format mylogformat '$http_x_forwarded_for - $remote_user [$time_local] '
+			'"$request" $status $body_bytes_sent '
+			'"$http_referer" "$http_user_agent"';
+access_log /var/log/nginx/access.log mylogformat buffer=32k;
+\end{lstlisting}
+
+
+\end{compactenum}
+
+另外，Nginx允许在access\_log指令中的日志文件路径中包含变量，例如：
+
+
+\begin{lstlisting}[language=bash]
+access_log /var/log/nginx/$server_name.log combined;
+\end{lstlisting}
+
+不过，在日志文件路径中包含变量有一定的副作用。
+
+\begin{compactitem}
+\item Nginx进程设置的用户和用户组必须有对该路径创建文件的权限，否则需要用户自己手动创建并修改拥有者信息。
+
+\item 缓存无法被使用。
+
+\item 对于每一条日志记录，日志文件都将先打开文件，再写入日志记录，然后关闭文件。
+
+\end{compactitem}
+
+
+日志文件的增长可能会影响到服务器效率，而且日志太大也不方便进行分析计算，因此需要对日志文件进行定时切割。
+
+根据需求，可以按月切割、按天切割、按小时切割等方式来处理日志。
+
+和Apache不同，Nginx不支持使用cronolog来进行日志轮转，因此用户需要采用kill命令并指定USR1\footnote{USR1系统信号指示Nginx重新生成新的日志文件（在切割日志时用途较大）。}系统信号来手动进行日志文件的切割。
+
+\begin{lstlisting}[language=bash]
+# mv /var/log/nginx/access.log /var/log/nginx/xxxx-xx-xx.log
+# kill -USR1 nginx_master_process_id
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item 如果nginx.conf中指定了pid文件的存放路径，那么可以执行：
+
+\begin{lstlisting}[language=bash]
+# mv /var/log/nginx/access.log /var/log/nginx/xxxx-xx-xx.log
+# kill -USR1 `cat /var/run/nginx.pid`
+\end{lstlisting}
+
+\item 如果需要每天定时切割日志，可以借助crontab来执行定时任务，并且按年-月-日格式来存放日志。
+
+\begin{lstlisting}[language=bash]
+# cat cut_nginx_log.sh
+#!/bin/bash
+# 日志存放路径
+logs_path="/var/log/";
+
+mkdir -p ${logs_path}$(date -d "yesterday" +"%Y")/$(date -d "yesterday" +"%m"/
+mv ${logs_path}access.log ${logs_path}$(date -d "yesterday" +"%Y")/$(date -d "yesterday" +"%m")/access_$(date -d "yesterday" +"%Y%m%d").log
+kill -USR1 `cat /var/run/nginx.pid`
+\end{lstlisting}
+
+\end{compactitem}
+
+下面配置crontab在每天的凌晨00:00定时执行上述脚本：
+
+\begin{lstlisting}[language=bash]
+# crontab -e
+00 00 * * * /bin/bash /usr/sbin/cut_nginx_log.sh
+\end{lstlisting}
+
+
+
+\subsection{open\_log\_file\_cache}
+
+
+
+为了提高包含变量的日志文件存放路径的性能，必须使用open\_log\_file\_cache指令设置被使用的日志文件描述符缓存。
+
+实际上，open\_log\_file\_cache指令主要用来设置包含变量的日志路径的文件描述符缓存，其语法格式如下：
+
+
+\begin{lstlisting}[language=bash]
+Syntax: open_log_file_cache max=N [inactive=time] [min_uses=N] [valid=time];
+open_log_file_cache off;
+Default: open_log_file_cache off;
+Context:	http, server, location
+\end{lstlisting}
+
+
+默认情况下，open\_log\_file\_cache指令是禁止的，等同于：
+
+\begin{lstlisting}[language=bash]
+open\_log\_file\_cache off;
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item max：设置缓存中的最大文件描述符数量。
+
+如果超过设置的最大文件描述符数量，则采用LRU（Least Recently Used）算法清除“较不常使用的文件描述符”，当内存缓冲区剩余的可用空间不够时，缓冲区尽可能地先保留使用者最常使用的数据，将最近未使用的数据移出内存，从而腾出空间来加载另外的数据。
+
+\item inactive：设置文件描述符的最长不被使用间隔，否则自动删除该文件描述符，默认时间为10秒钟。
+
+\item min\_uses：在参数inactive指定的时间范围内，如果日志文件超过被使用的次数，则将该日志文件的描述符记入缓存，默认次数为1。
+
+\item valid：设置检查变量指定的日志文件路径与文件名是否仍然存在的时间间隔，默认为60秒。
+
+\item off：禁止使用缓存。
+
+\end{compactitem}
+
+
+
+
+\begin{lstlisting}[language=bash]
+open_log_file_cache max=1000 inactive=20s min_uses=2 valid=1m;
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\section{gzip}
+
+
+gzip（GNU-ZIP）技术需要浏览器和服务器同时支持，这样就可以在服务器端对页面进行压缩，然后将页面传送到浏览器时解压缩并进行解析，从而提高页面的展现速度。
+
+
+Nginx提供的压缩输出由一组位于\texttt{http\{...\}}内部的gzip指令实现。
+
+
+\begin{lstlisting}[language=bash]
+gzip on;
+gzip_min_length 1k;
+gzip_buffers 4 16k;
+gzip_http_version 1.1;
+gzip_comp_level 2;
+gzip_types text/plain application/x-javascript text/css application/xml;
+gzip_vary on;
+\end{lstlisting}
+
+\section{autoindex}
+
+
+Apache和Nginx都可以实现自动列目录设置，前提条件是当前目录下不存在用index指令设置的默认首页文件。例如，如果需要在虚拟主机上的\texttt{location / \{...\}}目录控制中配置自动列目录，可以设置：
+
+
+
+\begin{lstlisting}[language=bash]
+location /
+{
+  autoindex on;
+}
+\end{lstlisting}
+
+另外，和自动列目录相关的命令分别是autoindex\_exact\_size和autoindex\_localtime。
+
+\subsection{autoindex\_exact\_size}
+
+autoindex\_exact\_size用于设定索引时文件大小的单位（B、KB、MB或GB）。
+
+
+\begin{lstlisting}[language=bash]
+autoindex_exact_size [on|off]
+\end{lstlisting}
+
+\subsection{autoindex\_localtime}
+
+autoindex\_localtime可以设置是否开启本地时间来显示文件时间，默认为关（GMT时间）。
+
+\begin{lstlisting}[language=bash]
+autoindex_localtime [on|off]
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+\section{expires}
+
+
+浏览器缓存（browser caching）可以在用户磁盘上对最近请求过的文档进行存储，这样当访问者再次请求该页面时，浏览器就可以从本地磁盘加载文档，从而加速浏览效果。
+
+浏览器缓存可以节约网络资源，提高网络效率，通过Nginx的expires指令可以在Header中输出对应的浏览器缓存指令（例如Expires和Cache-Control）。
+
+
+expires指令的作用域包括http、server和location等。
+
+\begin{lstlisting}[language=bash]
+Syntax:	expires [modified] time;
+expires epoch | max | off;
+Default:	expires off;
+Context:	http, server, location, if in location
+\end{lstlisting}
+
+
+默认情况下，expires指令是关闭的，表示不修改“Expires”和“Cache-Control”的值。
+
+expires指令可以控制HTTP应答中的“Expires”和“Cache-Control”来指定页面缓存，其中可以在time中设置正值或负值来影响“Expires”的值\footnote{具体来说，Expires的值通过在当前系统时间上加上设定的time值来获得。}。
+
+\begin{compactitem}
+\item epoch指定“Expires”的值为1 January, 1970, 00:00:01 GMT。
+\item max指定“Expires”的值为31 December, 2037, 23:59:59 GMT，并指定“Cache-Control”的值为10年。
+\end{compactitem}
+
+如果指定expires为-1，那么“Expires”的值为服务器当前时间减1秒，即永远过期。
+
+Cache-Control的值由用户指定的时间来决定，例如：
+
+\begin{compactitem}
+\item 负数：\texttt{Cache-Control:no-cache}
+\item 正数或零：\texttt{Cache-Control:max-age=\#,\#}，这里的时间是用户指定时间的秒数。
+\end{compactitem}
+
+通常情况下，对常见格式的图片、Flash文件可以在浏览器本地缓存30天，对js、css文件则在浏览器本地缓存1小时。
+
+\begin{lstlisting}[language=bash]
+location ~ .*\.(gif|jpg|jpeg|png|bmp|swf)$
+{
+  expires 30d;
+}
+  
+location ~ .*\.(js|css)?$
+{
+  expires 1h;
+}
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
