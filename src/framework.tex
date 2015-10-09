@@ -426,7 +426,11 @@ PHP的发展促使PHP框架层出不穷, 但是到底用不用PHP框架还存在
 \subsection{Overview}
 
 
+<<<<<<< HEAD
 The Yet Another Framework（Yaf）扩展是一个用来开发web应用的PHP框架，需要5.2.1及以上版本PHP，早期版本可能不能正常工作。
+=======
+The Yet Another Framework（Yaf）扩展是一个用来开发Web应用的PHP框架，需要5.2.1及以上版本PHP，早期版本可能不能正常工作。
+>>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 
 \begin{compactitem}
 \item Yaf需要SPL的支持. SPL在PHP5中是默认启用的扩展模块
@@ -667,7 +671,11 @@ yaf并不是万能的，它只是解决了应用中的最基本的一个问题�
 
 在PHP已经提供了对DB的一个轻度封装的PDO的前提下，直接使用PDO比复杂的ORM包装会更加简单和高效，因此最初Yaf并不包含ORM。
 
+<<<<<<< HEAD
 在后续的Yaf的版本中会考虑加入ORM, 不过只是一个简单的ORM, 类似于Yaf的内建视图引擎（Yaf_View_Simple）。
+=======
+在后续的Yaf的版本中会考虑加入ORM, 不过只是一个简单的ORM, 类似于Yaf的内建视图引擎（Yaf\_View\_Simple）。
+>>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 
 
 
@@ -829,6 +837,20 @@ Yaf提供了完善的API，并支持Bootstrap和插件机制，其整体流程�
 
 
 \begin{lstlisting}[language=PHP]
+<<<<<<< HEAD
+=======
+<?php
+define("APPLICATION_PATH",  dirname(__FILE__));
+define("PUB_TPL",dirname(__FILE__)."/application/views");
+require_once(APPLICATION_PATH."/Macro.php");
+try {
+	$app  = new Yaf_Application(APPLICATION_PATH."/conf/5bb88e1e53666ec494f1025023c16dea.ini");
+	$app->bootstrap() //call bootstrap methods defined in Bootstrap.php
+    ->run();
+} catch (Yaf_Exception_StartupError $e) {
+
+}
+>>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 
 \end{lstlisting}
 
