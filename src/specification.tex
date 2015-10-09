@@ -1,0 +1,850 @@
+\part{Specification}
+
+
+
+\chapter{Overview}
+
+
+
+
+\chapter{Directory}
+
+
+项目目录结构规范\footnote{directory_spec}的设计目标是项目开发的目录结构保持一致，使容易理解并方便构建与管理。
+
+
+\begin{compactitem}
+\item 项目包含但不限于业务项目和包项目。
+\item \texttt{\$\{root\}}表示项目的根目录。
+\end{compactitem}
+
+
+资源分成两大类，分别是源代码资源和内容资源。
+
+\begin{compactenum}
+\item 源代码资源：开发者编写的源代码，包括js、html、css、template等。
+\item 内容资源：希望作为内容提供给访问者的资源，包括图片、字体、flash、pdf等。
+\end{compactenum}
+
+\section{Naming}
+
+
+目录命名原则要求简洁，不允许使用复数。
+
+习惯性缩写的单词 必须(MUST) 采用容易理解的缩写。例如，源代码目录使用src，不使用source。
+
+\begin{compactitem}
+\item img（图片），不允许(MUST NOT) 使用image、images、imgs等。
+\item js（javascript脚本），不允许(MUST NOT) 使用script、scripts等。
+\item css（样式表），不允许(MUST NOT) 使用style、styles等。
+\item swf（flash），不允许(MUST NOT) 使用flash等。
+\item src（源文件目录），不允许(MUST NOT) 使用source等。
+\item dep（引入的第三方依赖包目录），不允许(MUST NOT) 使用lib、library、dependency等。
+\end{compactitem}
+
+不允许(MUST NOT) 使用复数形式。例如，imgs、docs是不被允许的。
+
+\section{Structure}
+
+在\$\{root\}下，目录结构必须(MUST) 按照职能进行划分， 不允许(MUST NOT) 将资源类型或业务逻辑划分的目录直接置于\$\{root\}下。
+
+常用的目录有src、doc、dep、test等。
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+    test/
+    doc/
+    dep/
+    ...
+\end{lstlisting}
+
+
+业务项目的\$\{root\}目录结构划分遵循\$\{root\}目录结构划分。
+
+
+从程序结构的角度来看，必须合理设计项目的目录结构。例如，支持文件和引用文件不能保存在公众可以公开访问的目录中，用户信息必须存储在数据库中。
+
+在项目开发过程中的第一步就是设计良好的项目目录结构。例如，下面是一个PHP项目目录结构的初级设计。
+
+\begin{lstlisting}[language=bash]
+${root}/
+    pub/
+    lib/
+    tpl/
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item pub/保存所有可以公开访问的页面；
+\item lib/保存可以被其他文件调用的引用文件；
+\item tpl/保存页面显示文件。
+\end{compactitem}
+
+在实际网站中，Web服务器应该只允许访客访问pub/目录下的文件（例如样式表、脚本和图片等），其他文件必须保存在公共目录之外的目录中。
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    pub/
+        img/
+        css/
+        js/
+    lib/
+    tpl/
+\end{lstlisting}
+
+
+Web服务器的根目录是一个特殊目录，应该通过httpd.conf或URL重写等指向指定的主页。
+
+
+\begin{lstlisting}[language=bash]
+# cat /etc/httpd/conf/httpd.conf
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+<IfModule dir_module>
+    DirectoryIndex index.html
+</IfModule>
+\end{lstlisting}
+
+除此之外，还需要创建其他的目录来提供与项目开发过程相关的资源，并且保持代码结构的清晰性。
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    pub/
+        img/
+        css/
+        js/
+    lib/
+    tpl/
+    sql/
+    doc/
+    test/
+\end{lstlisting}
+
+
+\begin{compactitem}
+\item sql/保存MySQL文件等；
+\item doc/保存帮助文档和开发笔记等；
+\item test/保存发烟测试和单元测试代码等。
+\end{compactitem}
+
+最后也是最基础的，只要页面需要被用户访问，那么它就应该被放置到可以公开访问的目录中，至于其执行过程则由Web服务器和应用程序本身来负责。
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+
+\section{Code}
+
+业务项目可以(SHOULD) 为项目起一个代号名称，代号名称 必须(MUST) 为一个单词，不宜过长。例如，北斗的项目代号为triones，哥伦布的项目代号为clb。
+
+项目代号应该有利于区分不同项目，为未来项目之间的重用留下扩展的后路。
+
+
+在项目开发时，通常会使用如下加载器配置，将项目代号指向src。
+
+
+\begin{lstlisting}[language=bash]
+{
+    baseUrl: '${docroot}',
+    paths: {
+        'triones': 'src'
+    }
+}
+\end{lstlisting}
+
+业务项目的src目录内，绝大多数情况 应当(SHOULD) 根据业务逻辑划分目录结构。划分出的子目录（比如例子中的biz1）称为业务目录。
+
+
+src下 必须(MUST) 只包含业务目录与common目录。业务公共资源 必须(MUST) 命名为common。common目录作为业务公共资源的目录，也视如业务目录。
+
+
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        common/
+        biz1/
+            subbiz1/
+            subbiz2/
+        biz2/
+\end{lstlisting}
+
+较小规模的业务项目（如投放端），src目录允许视如业务目录，直接按照业务目录划分原则划分目录结构。
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        foo.js
+\end{lstlisting}
+
+
+\section{Database}
+
+
+在设计项目目录结构的同时也需要根据需求来设计数据库结构。
+
+项目（例如网站）需要从用户处收集的信息和项目本身所能提供的服务相关，而且这些信息又会反过来影响数据库设计中的表结构等。
+
+
+
+
+\section{Principle}
+
+\begin{compactenum}
+\item JS资源：不允许(MUST NOT) 按资源类型划分目录， 必须(MUST) 按业务逻辑划分目录。JS资源应直接置于业务目录下。即：业务目录下不允许出现js目录。
+\item 除JS资源外的源文件资源，当资源数量较多时，为方便管理， 允许(SHOULD) 按资源类型划分目录。即：业务目录下允许出现css、tpl目录。
+\item 内容资源：允许(SHOULD) 按资源类型划分目录。即：业务目录下允许出现img、swf、font目录。
+\item 业务目录中，如果文件太多不好管理，需要划分子目录时，也 必须(MUST) 继续遵守根据业务逻辑划分的原则，划分子业务。如：下面例子中的subbiz1。
+\end{compactenum}
+
+
+\subsection{Biz}
+
+
+通常，对于一个业务目录， 鼓励(SHOULD) 将业务相关的源文件资源都直接置于业务目录下。
+
+
+\begin{lstlisting}[language=bash]
+biz1/
+    img/
+        add_button.png
+    add.js
+    add.tpl.html
+    add.css
+\end{lstlisting}
+
+业务目录下源文件资源数量较多时，我们第一直觉应该是：是否业务划分不够细？是否应该划分子业务，建立子业务目录？
+
+
+
+\begin{lstlisting}[language=bash]
+biz2/
+    subbiz1/
+        list.js
+        list.tpl.html
+        list.css
+    subbiz2/
+\end{lstlisting}
+
+遇到确实是一个业务整体，无法划分子业务时， 允许(MAY) 将非JS资源按资源类型划分目录进行管理。
+
+
+\begin{lstlisting}[language=bash]
+biz1/
+    css/
+        add.css
+        edit.css
+        remove.css
+        img/
+            add_button.png
+    tpl/
+        add.html
+        edit.html
+        remove.html
+    add.js
+    edit.js
+    remove.js
+\end{lstlisting}
+
+业务项目目录划分示例
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        common/
+            img/
+                sprites.png
+                logo.png
+            conf.js
+            layout.css
+        biz1/
+            img/
+                add_button.png
+            add.js
+            add.tpl.html
+            add.less
+        biz2/
+            subbiz1/
+                list.js
+                list.tpl.html
+                list.css
+            subbiz2/
+    dep/
+        er/
+            src/
+            test/
+        esui/
+            src/
+            test/
+    test/
+    doc/
+    index.html
+    main.html
+    ......
+\end{lstlisting}
+
+
+common目录为业务公共目录，用于存放业务项目的业务公共文件。所以，根据业务逻辑划分目录结构时，业务逻辑命名 不允许(MUST NOT) 为common。
+
+biz下面不能有资源类型目录，否则如果在biz下继续划分资源目录，代码的结构可能如下：
+
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        biz1/
+            js/
+                list.js
+\end{lstlisting}
+
+当我们需要使用list.js的时候，必须写如下的代码：\texttt{require("../biz1/js/list")}，但是从逻辑上说，更合理的写法应该是\texttt{require("../biz1/list")}，因此不推荐在biz下面对源代码资源划分目录。
+
+
+\subsection{Package}
+
+
+包项目的\$\{root\}目录结构划分遵循\$\{root\}目录结构划分。
+
+包是实现某个独立功能，有复用价值的代码集。按照通常的理解，一个包项目不应该特别复杂，所以包可视如一个不太复杂的业务，其src下的划分原则与业务项目的业务目录划分原则保持一致。
+
+
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        css/
+            img/
+                sprites.png
+            table.css
+            button.css
+            select.css
+        main.js
+        Control.js
+        InputControl.js
+        Button.js
+        Table.js
+        Select.js
+    test/
+    doc/
+    package.json
+    ...
+\end{lstlisting}
+
+
+直接置于\$\{root\}下的目录称作一级目录。一级目录 必须(MUST) 具有某种职能属性。
+
+除了下面列举的一些常见目录之外，\$\{root\}下也可以放置一些跟项目发布相关的文件，例如build.sh，build.xml，Makefile，Gruntfile等。
+
+\begin{compactitem}
+\item src
+
+src目录用于存放开发时源文件，发布时 必须(MUST) 被删除。
+
+\item dep
+
+dep目录用于存放项目引入依赖的第三方包。该目录下的内容通过平台工具管理，项目开发人员 不允许(MUST NOT) 更改dep目录下第三方包的任何内容。
+
+当项目需要修改引入的第三方代码时，第三方包应将源码直接置于\$\{root\}/src目录下，规则见该目录下的规定。
+
+
+\item tool
+
+tool目录用于存放开发时或构建阶段使用的工具。该目录在发布时 必须(MUST) 被删除。
+
+\item test
+
+test目录用于存放测试用例以及开发阶段的模拟数据。该目录在发布时 必须(MUST) 被删除。
+
+\item doc
+
+doc目录用于存放项目文档。项目文档可能是开发者维护的文档，也可能是通过工具生成的文档。
+
+\item entry
+
+entry目录用于存放项目的页面入口文件，通常是上线后可被直接访问的静态页面。
+
+\item asset目录用于存放用于线上访问的静态资源。
+
+通常构建工具会对src目录和dep目录下的资源进行分析、合并与压缩等，生成到asset目录下。所以该目录尽量避免手工管理。
+
+
+
+\end{compactitem}
+
+
+下面是一个构建工具生成后的asset目录示例：
+
+
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    asset/
+        js/
+            loader.js
+            build.js
+        css/
+            common.css
+            img/
+        tpl/
+            build.tpl.html
+        img/
+        ...
+\end{lstlisting}
+
+
+
+
+RIA项目通常会包含较少的页面入口文件，常见的是main.html，这些文件 可以(SHOULD) 直接放在\$\{root\}目录下。
+
+
+
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        common/
+            conf.js
+        card/
+        gold/
+        message/
+    index.html
+    main.html
+    ......
+\end{lstlisting}
+
+多页面项目通常页面入口文件较多， 可以(SHOULD) 统一放在entry目录中，按业务逻辑命名。
+
+\begin{lstlisting}[language=bash]
+${root}/
+    src/
+        common/
+            conf.js
+        card/
+        gold/
+        message/
+    entry/
+        card.html
+        gold.html
+        message.html
+        ......
+\end{lstlisting}
+
+
+项目在发布的时候，构建工具可以页面入口文件为入口进行分析和编译。
+
+RIA项目经过构建工具编译后，目录结构可能如下：
+
+\begin{lstlisting}[language=bash]
+output/
+    asset/
+        js/
+        css/
+        tpl/
+        img/
+    index.html
+    main.html
+\end{lstlisting}
+
+多页面项目经过构建工具编译后，目录结构可能如下：
+
+\begin{lstlisting}[language=bash]
+output/
+    card/
+        asset/
+            js/
+            css/
+            img/
+        index.html
+    gold/
+        asset/
+            js/
+            css/
+            img/
+        index.html
+\end{lstlisting}
+
+
+\subsection{Resource}
+
+
+按资源类型命名的目录称作资源目录。资源目录 不允许(MUST NOT) 直接置于\$\{root\}下。
+
+
+\begin{compactitem}
+\item js目录可用于存放js资源文件（包含可编译成js的coffeescript等语言）。js文件后缀名 必须(MUST) 为.js，coffeescript文件后缀名 必须(MUST) 为.coffee。
+
+js目录内 必须(MUST) 存放js资源文件，但js资源文件不一定（MAY NOT）存放于js目录下：
+
+\begin{compactenum}
+\item 对于src目录，js资源文件 不允许(MUST NOT) 存放于js目录下。
+\item 对于asset目录，js资源文件 可以(SHOULD) 存放于js目录下，视构建行为决定。
+\item 对于其他一级目录内，js资源文件 可以(SHOULD) 不存放于js目录下。
+\end{compactenum}
+
+\item css目录可用于存放css资源文件（包含less，sass等动态样式表语言）。css文件后缀名 必须(MUST) 为.css，less文件后缀名 必须(MUST) 为.less。
+
+css目录内 必须(MUST) 存放css资源文件，但css资源文件不一定（MAY NOT）存放于css目录下：
+
+\begin{compactenum}
+\item 对于src目录，css资源文件 可以(SHOULD) 存放于业务目录下，也 可以(SHOULD) 存放于css目录下。
+\item 对于asset目录，css资源文件 可以(SHOULD) 存放于css目录下，视构建行为决定。
+\item 对于其他一级目录内，css资源文件 可以(SHOULD) 不存放于css目录下。
+\end{compactenum}
+
+\item img目录可用于存放图片资源文件。包括页面直接引用的图片与css引用图片。常见的图片资源有gif/jpg/png/svg/bmp等。
+
+对于css引用的图片， 必须(MUST) 放在./img目录下，.代表当前css资源所在的目录。
+
+对于页面直接引用的图片：
+
+
+
+\begin{compactenum}
+\item 被多页面引用的图片 应该(SHOULD) 放在\$\{root\}/src/common/img目录下。
+\item 单一页面引用的图片 应该(SHOULD) 放在./img目录下，.代表当前页面所在的目录。
+\end{compactenum}
+
+\item tpl目录可用于存放template资源文件。template资源文件后缀名 可以(SHOULD) 为.html或.tpl。
+
+通常，对于RIA系统，template资源文件采用.html后缀使其能够被xhr加载。
+
+\item font目录可用于存放字体资源文件。常见的字体资源有tff/woff/svg等。
+
+
+\item swf目录可用于存放flash资源文件。flash资源文件 不允许(MUST NOT) 置于img目录中。
+
+\end{compactitem}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=bash]
+
+\end{lstlisting}
