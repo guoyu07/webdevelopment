@@ -1769,13 +1769,8 @@ apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
 为系统服务建立日志文件是必不可少的工作，否则网络中针对系统的开放端口的恶意连接尝试等攻击就无法记录，也就无法通过分析日志文件来监控运行状态，也无法分析出错误原因和找出安全隐患，因此在Apache httpd服务中至少要建立访问日志和错误日志文件来记录相关信息。
 
 \begin{compactitem}
-<<<<<<< HEAD
-\item /var/log/httpd/access_log 记录客户端正常的请求信息，可以用来分析热门网页等。
-\item /var/log/httpd/error_log 记录服务启动和运行过程中发生的错误、客户端请求错误以及主机设置错误等信息，可以用来检测404错误、文件权限设置错误和密码文件名输入错误等。
-=======
 \item /var/log/httpd/access\_log 记录客户端正常的请求信息，可以用来分析热门网页等。
 \item /var/log/httpd/error\_log 记录服务启动和运行过程中发生的错误、客户端请求错误以及主机设置错误等信息，可以用来检测404错误、文件权限设置错误和密码文件名输入错误等。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \end{compactitem}
 
 \subsection{Error Log}
@@ -2530,15 +2525,9 @@ httpd 本身提供了基本的密码保护方式，这样就可以在用户登�
 
 \begin{compactitem}
 \item /etc/php.d/mysqlnd.ini
-<<<<<<< HEAD
-\item /etc/php.d/mysqlnd_mysqli.ini
-\item /etc/php.d/mysqlnd_mysql.ini
-\item /etc/php.d/pdo_mysqlnd.ini
-=======
 \item /etc/php.d/mysqlnd\_mysqli.ini
 \item /etc/php.d/mysqlnd\_mysql.ini
 \item /etc/php.d/pdo\_mysqlnd.ini
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \end{compactitem}
 
 PHP 是动态语言，其程序中的值需要在运行时才能确定，因此如果需要安装 PHP 加速器等组件时需要/usr/bin/phpize 来辅助 PHP 扩展的编译。
@@ -3050,11 +3039,7 @@ $ vim /etc/hosts
 \item Group字段设置实际服务于请求的子进程运行时的用户组。
 \item ServerAdmin字段设置管理员Email地址来接收Web服务器错误等信息。
 \item DocumentRoot字段设置网站内容的存放目录。
-<<<<<<< HEAD
-\item DirectoryIndex字段定义网站首页（或主页），而且可以使用空格隔开多个首页名称（例如\texttt{index.html index.php），这样就可以根据文件名的先后顺序来显示网站首页。
-=======
 \item DirectoryIndex字段定义网站首页（或主页），而且可以使用空格隔开多个首页名称（例如\texttt{index.html}或\texttt{index.php}），这样就可以根据文件名的先后顺序来显示网站首页。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \item ErrorLog字段设置错误日志文件名和路径。
 \end{compactitem}
 
@@ -3075,11 +3060,7 @@ httpd 本身提供了 apachectl 来启动 HTTP Server，可以执行:
 # /usr/sbin/apachectl start
 \end{lstlisting}
 
-<<<<<<< HEAD
-为了检查 HTTP Server 的运行状况，可以使用 netstat 命令并结合 error_log 进行检查。
-=======
 为了检查 HTTP Server 的运行状况，可以使用 netstat 命令并结合 error\_log 进行检查。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 
 
 \begin{lstlisting}[language=bash]
@@ -3128,26 +3109,18 @@ httpd 本身提供了 apachectl 来启动 HTTP Server，可以执行:
 \end{lstlisting}
 
 
-<<<<<<< HEAD
-一 般 情 况 下， 用 户 的 个 人 网 站 位 于 用 户 家 目 录 下 的 public_html 中， 通 过 在userdir.conf 中启用 UserDir 以及指定个人网站根目录可以开启用户的个人网站。
 
-CentOS/Fedora 等操作系统中默认用户目录的权限是\texttt{drwx------}，因此 Web 服务器软件是无法访问的，因此至少应该让默认目录与 public_html 目录的权限为\texttt{drwxr-xr-x}，否则将会出现如下的错误:
-=======
 一 般 情 况 下， 用 户 的 个 人 网 站 位 于 用 户 家 目 录 下 的 public\_html 中， 通 过 在userdir.conf 中启用 UserDir 以及指定个人网站根目录可以开启用户的个人网站。
 
 CentOS/Fedora 等操作系统中默认用户目录的权限是\texttt{drwx------}，因此 Web 服务器软件是无法访问的，因此至少应该让默认目录与 public\_html 目录的权限为\texttt{drwxr-xr-x}，否则将会出现如下的错误:
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 \begin{lstlisting}[language=bash]
 You don't have permission to access /~test on this server
 \end{lstlisting}
 
 
-<<<<<<< HEAD
-如果希望将用户的个人网站设置为 http://domain/~ test 的格式，则可以执行如下的操作:
-=======
 如果希望将用户的个人网站设置为 \texttt{http://domain/～test} 的格式，则可以执行如下的操作:
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 
 \begin{lstlisting}[language=bash]
 # cd /var/www/html
@@ -3418,15 +3391,11 @@ Total: 334 1296 2445
 \subsection{Status}
 
 
-<<<<<<< HEAD
-为了使用 httpd 服务器提供的查询主机状态的功能，需要加载 mod_status 模块。
 
-默认情况下，mod_status 模块是关闭的，可以在配置文件中进行如下的修改来启用。
-=======
 为了使用 httpd 服务器提供的查询主机状态的功能，需要加载 mod\_status 模块。
 
 默认情况下，mod\_status 模块是关闭的，可以在配置文件中进行如下的修改来启用。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 
 
@@ -3442,11 +3411,9 @@ ExtendedStatus On
 </Location>
 \end{lstlisting}
 
-<<<<<<< HEAD
-在http://your_server_name/status输出的服务器状态信息中包括:
-=======
+
 在http://your\_server\_name/status输出的服务器状态信息中包括:
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 \begin{compactitem}
 \item Server Version
@@ -3498,11 +3465,9 @@ Alias /usage /var/www/usage
 
 \subsection{AWStats}
 
-<<<<<<< HEAD
-awstats 是使用 Perl 语言开发的，因此需要确定 mod_perl 和 CGI 的执行权限。
-=======
+
 awstats 是使用 Perl 语言开发的，因此需要确定 mod\_perl 和 CGI 的执行权限。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 awstats 可以使用系统的 cron 进行分析，而且还可以使用浏览器直接以 CGI 的方式来实时更新日志文件，不过一般都是以 crontab 的方式来进行日志分析。
 
@@ -3534,11 +3499,9 @@ AuthUserFile /var/www/apache.passwd
 require valid-user
 \end{lstlisting}
 
-<<<<<<< HEAD
-awstats 的设置文件示例文件（awstats.model.conf）位于/etc/awstats/目录，在实际应用中的文件名格式为:awstats.hostname.conf。
-=======
+
 awstats 的设置文件示例文件（awstats.model.conf）位于/etc/awstats/目录，在实际应用中的文件名格式为awstats.hostname.conf。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 
 
@@ -3864,16 +3827,7 @@ SetHandler application/x-httpd-php
 </IfModule>
 \end{lstlisting}
 
-<<<<<<< HEAD
-\section{PHP-FastCGI}
 
-
-\section{PHP-FPM}
-
-
-
-下面的示例将使用PHP-FPM
-=======
 \subsection{PHP-FastCGI}
 
 
@@ -3881,7 +3835,7 @@ SetHandler application/x-httpd-php
 
 
 PHP-FPM可以理解为PHP的FastCGI进程管理器，可以平滑变更php.ini配置而无需重启php-cgi。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 首先，打开并找到/etc/php.ini中的cgi.fix\_pathinfo=1，然后修改为0：
 
@@ -3917,9 +3871,7 @@ $ sudo systemctl enable php-fpm.service
 \end{lstlisting}
 
 
-<<<<<<< HEAD
 
-=======
 如果在使用Nginx+PHP来调试程序时，需要将display\_errors打开来显示PHP错误信息，否则Nginx只会报出状态为500的空白错误页。
 
 \begin{lstlisting}[language=bash]
@@ -3987,7 +3939,7 @@ Options:
 \hline
 \end{tabular}
 \end{table}
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 
 
@@ -4059,7 +4011,7 @@ $ ldconfig -v
 随着Web应用程序规模的扩展，需要进一步引入缓存、代理和安全等子系统。
 
 
-<<<<<<< HEAD
+
 
 
 \subsection{Installation}
@@ -4070,9 +4022,9 @@ $ sudo yum install nginx
 $ sudo systemctl enable nginx.service
 $ sudo systemctl start nginx.service
 \end{lstlisting}
-=======
+
 \subsection{Pre-build}
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 如果从源码编译安装 Web 服务器软件，除了必要的编译器、自动配置和构建工具之外，还需要解决模块依赖性。
 
@@ -4082,11 +4034,9 @@ $ sudo systemctl start nginx.service
 # yum install zlib zlib-devel openssl openssl-devel pcre pcre-devel
 \end{lstlisting}
 
-<<<<<<< HEAD
-Nginx 软件的一些模块就需要其他第三方库的支持，例如：
-=======
+
 Nginx 软件的一些模块需要其他第三方库的支持，例如：
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 \begin{compactitem}
 \item gzip 模块需要 zlib 库;
@@ -4094,8 +4044,7 @@ Nginx 软件的一些模块需要其他第三方库的支持，例如：
 \item ssl 功能需要 openssl 库。
 \end{compactitem}
 
-<<<<<<< HEAD
-=======
+
 
 \subsection{Configure}
 
@@ -4157,7 +4106,7 @@ $ sudo systemctl start nginx.service
 
 
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 Nginx 的 Windows 版本只需解压到不含空格的路径中，并在命令中执行 start nginx 即可启动 Nginx 服务器软件。
 
 
@@ -4178,869 +4127,16 @@ nginx -s [stop | quit | reopen | reload]
 
 \begin{lstlisting}[language=bash]
 $ tar zxvf nginx-x.x.x.tar.gz
-<<<<<<< HEAD
-$ cd nginx
-$ ./configure
-checking for OS
-+ Linux 3.17.7-200.fc20.x86_64 x86_64
-checking for C compiler ... found
-+ using GNU C compiler
-+ gcc version: 4.8.3 20140911 （Red Hat 4.8.3-7） （GCC）
-=======
 $ cd nginx-x.x.x
 $ ./configure
-checking for OS
- + Linux 4.1.6-100.fc21.x86_64 x86_64
-checking for C compiler ... found
- + using GNU C compiler
- + gcc version: 4.9.2 20150212 (Red Hat 4.9.2-6) (GCC) 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-checking for gcc -pipe switch ... found
-checking for gcc builtin atomic operations ... found
-checking for C99 variadic macros ... found
-checking for gcc variadic macros ... found
-checking for unistd.h ... found
-checking for inttypes.h ... found
-checking for limits.h ... found
-checking for sys/filio.h ... not found
-checking for sys/param.h ... found
-checking for sys/mount.h ... found
-checking for sys/statvfs.h ... found
-checking for crypt.h ... found
-checking for Linux specific features
-checking for epoll ... found
-<<<<<<< HEAD
-checking for EPOLLRDHUP ... found16.1. OVERVIEW
-checking for O_PATH ... found
-checking for sendfile（） ... found
-checking for sendfile64（） ... found
-checking for sys/prctl.h ... found
-checking for prctl（PR_SET_DUMPABLE） ... found
-checking for sched_setaffinity（） ... found
-checking for crypt_r（） ... found
-checking for sys/vfs.h ... found
-checking for nobody group ... found
-checking for poll（） ... found
-checking for /dev/poll ... not found
-checking for kqueue ... not found
-checking for crypt（） ... not found
-checking for crypt（） in libcrypt ... found
-checking for F_READAHEAD ... not found
-checking for posix_fadvise（） ... found
-checking for O_DIRECT ... found
-checking for F_NOCACHE ... not found
-checking for directio（） ... not found
-checking for statfs（） ... found
-checking for statvfs（） ... found
-checking for dlopen（） ... not found
-checking for dlopen（） in libdl ... found
-checking for sched_yield（） ... found
-=======
-checking for EPOLLRDHUP ... found
-checking for O_PATH ... found
-checking for sendfile() ... found
-checking for sendfile64() ... found
-checking for sys/prctl.h ... found
-checking for prctl(PR_SET_DUMPABLE) ... found
-checking for sched_setaffinity() ... found
-checking for crypt_r() ... found
-checking for sys/vfs.h ... found
-checking for poll() ... found
-checking for /dev/poll ... not found
-checking for kqueue ... not found
-checking for crypt() ... not found
-checking for crypt() in libcrypt ... found
-checking for F_READAHEAD ... not found
-checking for posix_fadvise() ... found
-checking for O_DIRECT ... found
-checking for F_NOCACHE ... not found
-checking for directio() ... not found
-checking for statfs() ... found
-checking for statvfs() ... found
-checking for dlopen() ... not found
-checking for dlopen() in libdl ... found
-checking for sched_yield() ... found
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-checking for SO_SETFIB ... not found
-checking for SO_ACCEPTFILTER ... not found
-checking for TCP_DEFER_ACCEPT ... found
-checking for TCP_KEEPIDLE ... found
-checking for TCP_FASTOPEN ... found
-checking for TCP_INFO ... found
-<<<<<<< HEAD
-checking for accept4（） ... found
-checking for int size ... 4 bytes
-checking for long size ... 8 bytes72
-
-=======
-checking for accept4() ... found
-checking for kqueue AIO support ... not found
-checking for Linux AIO support ... found
-checking for int size ... 4 bytes
-checking for long size ... 8 bytes
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-checking for long long size ... 8 bytes
-checking for void * size ... 8 bytes
-checking for uint64_t ... found
-checking for sig_atomic_t ... found
-checking for sig_atomic_t size ... 4 bytes
-checking for socklen_t ... found
-checking for in_addr_t ... found
-checking for in_port_t ... found
-checking for rlim_t ... found
-checking for uintptr_t ... uintptr_t found
-checking for system byte ordering ... little endian
-checking for size_t size ... 8 bytes
-checking for off_t size ... 8 bytes
-checking for time_t size ... 8 bytes
-<<<<<<< HEAD
-checking for setproctitle（） ... not found
-checking for pread（） ... found
-checking for pwrite（） ... found
-checking for sys_nerr ... found
-checking for localtime_r（） ... found
-checking for posix_memalign（） ... found
-checking for memalign（） ... found
-checking for mmap（MAP_ANON|MAP_SHARED） ... found
-checking for mmap（"/dev/zero"， MAP_SHARED） ... found
-=======
-checking for AF_INET6 ... found
-checking for setproctitle() ... not found
-checking for pread() ... found
-checking for pwrite() ... found
-checking for sys_nerr ... found
-checking for localtime_r() ... found
-checking for posix_memalign() ... found
-checking for memalign() ... found
-checking for mmap(MAP_ANON|MAP_SHARED) ... found
-checking for mmap("/dev/zero", MAP_SHARED) ... found
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-checking for System V shared memory ... found
-checking for POSIX semaphores ... not found
-checking for POSIX semaphores in libpthread ... found
-checking for struct msghdr.msg_control ... found
-<<<<<<< HEAD
-checking for ioctl（FIONBIO） ... found
-checking for struct tm.tm_gmtoff ... found
-checking for struct dirent.d_namlen ... not found
-checking for struct dirent.d_type ... found
-checking for sysconf（_SC_NPROCESSORS_ONLN） ... found
-checking for openat（）， fstatat（） ... found16.1. OVERVIEW
-checking for getaddrinfo（） ... found
-checking for PCRE library ... found
-checking for PCRE JIT support ... found
-checking for md5 in system md library ... not found
-checking for md5 in system md5 library ... not found
-checking for md5 in system OpenSSL crypto library ... found
-checking for sha1 in system md library ... not found
-checking for sha1 in system OpenSSL crypto library ... found
-checking for zlib library ... found
-creating objs/Makefile
-Configuration summary
-+ using system PCRE library
-+ OpenSSL library is not used
-+ md5: using system crypto library
-+ sha1: using system crypto library
-+ using system zlib library
-nginx path prefix: "/usr/local/nginx"
-nginx binary file: "/usr/local/nginx/sbin/nginx"
-nginx configuration prefix: "/usr/local/nginx/conf"
-nginx configuration file: "/usr/local/nginx/conf/nginx.conf"
-nginx pid file: "/usr/local/nginx/logs/nginx.pid"
-nginx error log file: "/usr/local/nginx/logs/error.log"
-nginx http access log file: "/usr/local/nginx/logs/access.log"
-nginx http client request body temporary files: "client_body_temp"
-nginx http proxy temporary files: "proxy_temp"
-nginx http fastcgi temporary files: "fastcgi_temp"
-nginx http uwsgi temporary files: "uwsgi_temp"
-nginx http scgi temporary files: "scgi_temp"
 $ make
 # make install
-make -f objs/Makefile install74
-
-make[1]: Entering directory `/home/test/nginx-1.6.2'
-test -d '/usr/local/nginx' || mkdir -p '/usr/local/nginx'
-test -d '/usr/local/nginx/sbin'
-|| mkdir -p '/usr/local/nginx/sbin'
-test ! -f '/usr/local/nginx/sbin/nginx' || mv '/usr/local/nginx/sbin/nginx' '/usr/local
-cp objs/nginx '/usr/local/nginx/sbin/nginx'
-test -d '/usr/local/nginx/conf'
-|| mkdir -p '/usr/local/nginx/conf'
-cp conf/koi-win '/usr/local/nginx/conf'
-cp conf/koi-utf '/usr/local/nginx/conf'
-cp conf/win-utf '/usr/local/nginx/conf'
-test -f '/usr/local/nginx/conf/mime.types' || cp conf/mime.types '/usr/local/nginx/conf
-cp conf/mime.types '/usr/local/nginx/conf/mime.types.default'
-test -f '/usr/local/nginx/conf/fastcgi_params' || cp conf/fastcgi_params '/usr/local/ng
-cp conf/fastcgi_params
-'/usr/local/nginx/conf/fastcgi_params.default'
-test -f '/usr/local/nginx/conf/fastcgi.conf' || cp conf/fastcgi.conf '/usr/local/nginx/
-cp conf/fastcgi.conf '/usr/local/nginx/conf/fastcgi.conf.default'
-test -f '/usr/local/nginx/conf/uwsgi_params' || cp conf/uwsgi_params '/usr/local/nginx/
-cp conf/uwsgi_params
-'/usr/local/nginx/conf/uwsgi_params.default'
-test -f '/usr/local/nginx/conf/scgi_params' || cp conf/scgi_params '/usr/local/nginx/co
-cp conf/scgi_params
-'/usr/local/nginx/conf/scgi_params.default'
-test -f '/usr/local/nginx/conf/nginx.conf' || cp conf/nginx.conf '/usr/local/nginx/conf
-cp conf/nginx.conf '/usr/local/nginx/conf/nginx.conf.default'
-test -d '/usr/local/nginx/logs'
-|| mkdir -p '/usr/local/nginx/logs'
-test -d '/usr/local/nginx/logs' ||
-test -d '/usr/local/nginx/html'
-mkdir -p '/usr/local/nginx/logs'
-|| cp -R html '/usr/local/nginx'
-test -d '/usr/local/nginx/logs' ||
-mkdir -p '/usr/local/nginx/logs'
-make[1]: Leaving directory `/home/test/nginx-1.6.2'
 \end{lstlisting}
 
-
-Nginx 默认安装在/usr/local/nginx 目录中，可以通过./configure --help 查看可选择的编译选项。
-=======
-checking for ioctl(FIONBIO) ... found
-checking for struct tm.tm_gmtoff ... found
-checking for struct dirent.d_namlen ... not found
-checking for struct dirent.d_type ... found
-checking for sysconf(_SC_NPROCESSORS_ONLN) ... found
-checking for openat(), fstatat() ... found
-checking for getaddrinfo() ... found
-checking for PCRE library ... found
-checking for PCRE JIT support ... found
-checking for OpenSSL library ... found
-checking for zlib library ... found
-creating objs/Makefile
-
-Configuration summary
-  + using system PCRE library
-  + using system OpenSSL library
-  + md5: using OpenSSL library
-  + sha1: using OpenSSL library
-  + using system zlib library
-
-  nginx path prefix: "/etc/nginx"
-  nginx binary file: "/usr/sbin/nginx"
-  nginx configuration prefix: "/etc/nginx"
-  nginx configuration file: "/etc/nginx/nginx.conf"
-  nginx pid file: "/var/run/nginx.pid"
-  nginx error log file: "/var/log/nginx/error.log"
-  nginx http access log file: "/var/log/nginx/access.log"
-  nginx http client request body temporary files: "/var/cache/nginx/client_temp"
-  nginx http proxy temporary files: "/var/cache/nginx/proxy_temp"
-  nginx http fastcgi temporary files: "/var/cache/nginx/fastcgi_temp"
-  nginx http uwsgi temporary files: "/var/cache/nginx/uwsgi_temp"
-  nginx http scgi temporary files: "/var/cache/nginx/scgi_temp"
-$ make
-make -f objs/Makefile
-make[1]: Entering directory '/usr/local/src/nginx-1.8.0'
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/nginx.o \
-	src/core/nginx.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_log.o \
-	src/core/ngx_log.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_palloc.o \
-	src/core/ngx_palloc.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_array.o \
-	src/core/ngx_array.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_list.o \
-	src/core/ngx_list.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_hash.o \
-	src/core/ngx_hash.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_buf.o \
-	src/core/ngx_buf.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_queue.o \
-	src/core/ngx_queue.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_output_chain.o \
-	src/core/ngx_output_chain.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_string.o \
-	src/core/ngx_string.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_parse.o \
-	src/core/ngx_parse.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_inet.o \
-	src/core/ngx_inet.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_file.o \
-	src/core/ngx_file.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_crc32.o \
-	src/core/ngx_crc32.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_murmurhash.o \
-	src/core/ngx_murmurhash.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_md5.o \
-	src/core/ngx_md5.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_rbtree.o \
-	src/core/ngx_rbtree.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_radix_tree.o \
-	src/core/ngx_radix_tree.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_slab.o \
-	src/core/ngx_slab.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_times.o \
-	src/core/ngx_times.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_shmtx.o \
-	src/core/ngx_shmtx.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_connection.o \
-	src/core/ngx_connection.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_cycle.o \
-	src/core/ngx_cycle.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_spinlock.o \
-	src/core/ngx_spinlock.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_cpuinfo.o \
-	src/core/ngx_cpuinfo.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_conf_file.o \
-	src/core/ngx_conf_file.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_resolver.o \
-	src/core/ngx_resolver.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_open_file_cache.o \
-	src/core/ngx_open_file_cache.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_crypt.o \
-	src/core/ngx_crypt.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_proxy_protocol.o \
-	src/core/ngx_proxy_protocol.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_syslog.o \
-	src/core/ngx_syslog.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event.o \
-	src/event/ngx_event.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_timer.o \
-	src/event/ngx_event_timer.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_posted.o \
-	src/event/ngx_event_posted.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_accept.o \
-	src/event/ngx_event_accept.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_connect.o \
-	src/event/ngx_event_connect.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_pipe.o \
-	src/event/ngx_event_pipe.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_time.o \
-	src/os/unix/ngx_time.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_errno.o \
-	src/os/unix/ngx_errno.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_alloc.o \
-	src/os/unix/ngx_alloc.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_files.o \
-	src/os/unix/ngx_files.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_socket.o \
-	src/os/unix/ngx_socket.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_recv.o \
-	src/os/unix/ngx_recv.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_readv_chain.o \
-	src/os/unix/ngx_readv_chain.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_udp_recv.o \
-	src/os/unix/ngx_udp_recv.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_send.o \
-	src/os/unix/ngx_send.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_writev_chain.o \
-	src/os/unix/ngx_writev_chain.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_channel.o \
-	src/os/unix/ngx_channel.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_shmem.o \
-	src/os/unix/ngx_shmem.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_process.o \
-	src/os/unix/ngx_process.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_daemon.o \
-	src/os/unix/ngx_daemon.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_setaffinity.o \
-	src/os/unix/ngx_setaffinity.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_setproctitle.o \
-	src/os/unix/ngx_setproctitle.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_posix_init.o \
-	src/os/unix/ngx_posix_init.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_user.o \
-	src/os/unix/ngx_user.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_process_cycle.o \
-	src/os/unix/ngx_process_cycle.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_linux_init.o \
-	src/os/unix/ngx_linux_init.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/modules/ngx_epoll_module.o \
-	src/event/modules/ngx_epoll_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_linux_sendfile_chain.o \
-	src/os/unix/ngx_linux_sendfile_chain.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/os/unix/ngx_linux_aio_read.o \
-	src/os/unix/ngx_linux_aio_read.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_openssl.o \
-	src/event/ngx_event_openssl.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/event/ngx_event_openssl_stapling.o \
-	src/event/ngx_event_openssl_stapling.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/src/core/ngx_regex.o \
-	src/core/ngx_regex.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http.o \
-	src/http/ngx_http.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_core_module.o \
-	src/http/ngx_http_core_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_special_response.o \
-	src/http/ngx_http_special_response.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_request.o \
-	src/http/ngx_http_request.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_parse.o \
-	src/http/ngx_http_parse.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_header_filter_module.o \
-	src/http/ngx_http_header_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_write_filter_module.o \
-	src/http/ngx_http_write_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_copy_filter_module.o \
-	src/http/ngx_http_copy_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_log_module.o \
-	src/http/modules/ngx_http_log_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_request_body.o \
-	src/http/ngx_http_request_body.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_variables.o \
-	src/http/ngx_http_variables.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_script.o \
-	src/http/ngx_http_script.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_upstream.o \
-	src/http/ngx_http_upstream.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_upstream_round_robin.o \
-	src/http/ngx_http_upstream_round_robin.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_parse_time.o \
-	src/http/ngx_http_parse_time.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_static_module.o \
-	src/http/modules/ngx_http_static_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_index_module.o \
-	src/http/modules/ngx_http_index_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_chunked_filter_module.o \
-	src/http/modules/ngx_http_chunked_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_range_filter_module.o \
-	src/http/modules/ngx_http_range_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_headers_filter_module.o \
-	src/http/modules/ngx_http_headers_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_not_modified_filter_module.o \
-	src/http/modules/ngx_http_not_modified_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_file_cache.o \
-	src/http/ngx_http_file_cache.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_gzip_filter_module.o \
-	src/http/modules/ngx_http_gzip_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_postpone_filter_module.o \
-	src/http/ngx_http_postpone_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_ssi_filter_module.o \
-	src/http/modules/ngx_http_ssi_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_charset_filter_module.o \
-	src/http/modules/ngx_http_charset_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_sub_filter_module.o \
-	src/http/modules/ngx_http_sub_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_addition_filter_module.o \
-	src/http/modules/ngx_http_addition_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_gunzip_filter_module.o \
-	src/http/modules/ngx_http_gunzip_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_userid_filter_module.o \
-	src/http/modules/ngx_http_userid_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_spdy.o \
-	src/http/ngx_http_spdy.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_spdy_module.o \
-	src/http/ngx_http_spdy_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/ngx_http_spdy_filter_module.o \
-	src/http/ngx_http_spdy_filter_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_gzip_static_module.o \
-	src/http/modules/ngx_http_gzip_static_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_dav_module.o \
-	src/http/modules/ngx_http_dav_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_autoindex_module.o \
-	src/http/modules/ngx_http_autoindex_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_random_index_module.o \
-	src/http/modules/ngx_http_random_index_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_auth_request_module.o \
-	src/http/modules/ngx_http_auth_request_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_auth_basic_module.o \
-	src/http/modules/ngx_http_auth_basic_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_access_module.o \
-	src/http/modules/ngx_http_access_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_limit_conn_module.o \
-	src/http/modules/ngx_http_limit_conn_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_limit_req_module.o \
-	src/http/modules/ngx_http_limit_req_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_realip_module.o \
-	src/http/modules/ngx_http_realip_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_geo_module.o \
-	src/http/modules/ngx_http_geo_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_map_module.o \
-	src/http/modules/ngx_http_map_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_split_clients_module.o \
-	src/http/modules/ngx_http_split_clients_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_referer_module.o \
-	src/http/modules/ngx_http_referer_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_rewrite_module.o \
-	src/http/modules/ngx_http_rewrite_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_ssl_module.o \
-	src/http/modules/ngx_http_ssl_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_proxy_module.o \
-	src/http/modules/ngx_http_proxy_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_fastcgi_module.o \
-	src/http/modules/ngx_http_fastcgi_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_uwsgi_module.o \
-	src/http/modules/ngx_http_uwsgi_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_scgi_module.o \
-	src/http/modules/ngx_http_scgi_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_memcached_module.o \
-	src/http/modules/ngx_http_memcached_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_empty_gif_module.o \
-	src/http/modules/ngx_http_empty_gif_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_browser_module.o \
-	src/http/modules/ngx_http_browser_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_secure_link_module.o \
-	src/http/modules/ngx_http_secure_link_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_flv_module.o \
-	src/http/modules/ngx_http_flv_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_mp4_module.o \
-	src/http/modules/ngx_http_mp4_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_upstream_hash_module.o \
-	src/http/modules/ngx_http_upstream_hash_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
-	src/http/modules/ngx_http_upstream_ip_hash_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_upstream_least_conn_module.o \
-	src/http/modules/ngx_http_upstream_least_conn_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_upstream_keepalive_module.o \
-	src/http/modules/ngx_http_upstream_keepalive_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
-	-o objs/src/http/modules/ngx_http_stub_status_module.o \
-	src/http/modules/ngx_http_stub_status_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail.o \
-	src/mail/ngx_mail.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_core_module.o \
-	src/mail/ngx_mail_core_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_handler.o \
-	src/mail/ngx_mail_handler.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_parse.o \
-	src/mail/ngx_mail_parse.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_ssl_module.o \
-	src/mail/ngx_mail_ssl_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_pop3_module.o \
-	src/mail/ngx_mail_pop3_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_pop3_handler.o \
-	src/mail/ngx_mail_pop3_handler.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_imap_module.o \
-	src/mail/ngx_mail_imap_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_imap_handler.o \
-	src/mail/ngx_mail_imap_handler.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_smtp_module.o \
-	src/mail/ngx_mail_smtp_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_smtp_handler.o \
-	src/mail/ngx_mail_smtp_handler.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_auth_http_module.o \
-	src/mail/ngx_mail_auth_http_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/mail \
-	-o objs/src/mail/ngx_mail_proxy_module.o \
-	src/mail/ngx_mail_proxy_module.c
-cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
-	-o objs/ngx_modules.o \
-	objs/ngx_modules.c
-cc -o objs/nginx \
-objs/src/core/nginx.o \
-objs/src/core/ngx_log.o \
-objs/src/core/ngx_palloc.o \
-objs/src/core/ngx_array.o \
-objs/src/core/ngx_list.o \
-objs/src/core/ngx_hash.o \
-objs/src/core/ngx_buf.o \
-objs/src/core/ngx_queue.o \
-objs/src/core/ngx_output_chain.o \
-objs/src/core/ngx_string.o \
-objs/src/core/ngx_parse.o \
-objs/src/core/ngx_inet.o \
-objs/src/core/ngx_file.o \
-objs/src/core/ngx_crc32.o \
-objs/src/core/ngx_murmurhash.o \
-objs/src/core/ngx_md5.o \
-objs/src/core/ngx_rbtree.o \
-objs/src/core/ngx_radix_tree.o \
-objs/src/core/ngx_slab.o \
-objs/src/core/ngx_times.o \
-objs/src/core/ngx_shmtx.o \
-objs/src/core/ngx_connection.o \
-objs/src/core/ngx_cycle.o \
-objs/src/core/ngx_spinlock.o \
-objs/src/core/ngx_cpuinfo.o \
-objs/src/core/ngx_conf_file.o \
-objs/src/core/ngx_resolver.o \
-objs/src/core/ngx_open_file_cache.o \
-objs/src/core/ngx_crypt.o \
-objs/src/core/ngx_proxy_protocol.o \
-objs/src/core/ngx_syslog.o \
-objs/src/event/ngx_event.o \
-objs/src/event/ngx_event_timer.o \
-objs/src/event/ngx_event_posted.o \
-objs/src/event/ngx_event_accept.o \
-objs/src/event/ngx_event_connect.o \
-objs/src/event/ngx_event_pipe.o \
-objs/src/os/unix/ngx_time.o \
-objs/src/os/unix/ngx_errno.o \
-objs/src/os/unix/ngx_alloc.o \
-objs/src/os/unix/ngx_files.o \
-objs/src/os/unix/ngx_socket.o \
-objs/src/os/unix/ngx_recv.o \
-objs/src/os/unix/ngx_readv_chain.o \
-objs/src/os/unix/ngx_udp_recv.o \
-objs/src/os/unix/ngx_send.o \
-objs/src/os/unix/ngx_writev_chain.o \
-objs/src/os/unix/ngx_channel.o \
-objs/src/os/unix/ngx_shmem.o \
-objs/src/os/unix/ngx_process.o \
-objs/src/os/unix/ngx_daemon.o \
-objs/src/os/unix/ngx_setaffinity.o \
-objs/src/os/unix/ngx_setproctitle.o \
-objs/src/os/unix/ngx_posix_init.o \
-objs/src/os/unix/ngx_user.o \
-objs/src/os/unix/ngx_process_cycle.o \
-objs/src/os/unix/ngx_linux_init.o \
-objs/src/event/modules/ngx_epoll_module.o \
-objs/src/os/unix/ngx_linux_sendfile_chain.o \
-objs/src/os/unix/ngx_linux_aio_read.o \
-objs/src/event/ngx_event_openssl.o \
-objs/src/event/ngx_event_openssl_stapling.o \
-objs/src/core/ngx_regex.o \
-objs/src/http/ngx_http.o \
-objs/src/http/ngx_http_core_module.o \
-objs/src/http/ngx_http_special_response.o \
-objs/src/http/ngx_http_request.o \
-objs/src/http/ngx_http_parse.o \
-objs/src/http/ngx_http_header_filter_module.o \
-objs/src/http/ngx_http_write_filter_module.o \
-objs/src/http/ngx_http_copy_filter_module.o \
-objs/src/http/modules/ngx_http_log_module.o \
-objs/src/http/ngx_http_request_body.o \
-objs/src/http/ngx_http_variables.o \
-objs/src/http/ngx_http_script.o \
-objs/src/http/ngx_http_upstream.o \
-objs/src/http/ngx_http_upstream_round_robin.o \
-objs/src/http/ngx_http_parse_time.o \
-objs/src/http/modules/ngx_http_static_module.o \
-objs/src/http/modules/ngx_http_index_module.o \
-objs/src/http/modules/ngx_http_chunked_filter_module.o \
-objs/src/http/modules/ngx_http_range_filter_module.o \
-objs/src/http/modules/ngx_http_headers_filter_module.o \
-objs/src/http/modules/ngx_http_not_modified_filter_module.o \
-objs/src/http/ngx_http_file_cache.o \
-objs/src/http/modules/ngx_http_gzip_filter_module.o \
-objs/src/http/ngx_http_postpone_filter_module.o \
-objs/src/http/modules/ngx_http_ssi_filter_module.o \
-objs/src/http/modules/ngx_http_charset_filter_module.o \
-objs/src/http/modules/ngx_http_sub_filter_module.o \
-objs/src/http/modules/ngx_http_addition_filter_module.o \
-objs/src/http/modules/ngx_http_gunzip_filter_module.o \
-objs/src/http/modules/ngx_http_userid_filter_module.o \
-objs/src/http/ngx_http_spdy.o \
-objs/src/http/ngx_http_spdy_module.o \
-objs/src/http/ngx_http_spdy_filter_module.o \
-objs/src/http/modules/ngx_http_gzip_static_module.o \
-objs/src/http/modules/ngx_http_dav_module.o \
-objs/src/http/modules/ngx_http_autoindex_module.o \
-objs/src/http/modules/ngx_http_random_index_module.o \
-objs/src/http/modules/ngx_http_auth_request_module.o \
-objs/src/http/modules/ngx_http_auth_basic_module.o \
-objs/src/http/modules/ngx_http_access_module.o \
-objs/src/http/modules/ngx_http_limit_conn_module.o \
-objs/src/http/modules/ngx_http_limit_req_module.o \
-objs/src/http/modules/ngx_http_realip_module.o \
-objs/src/http/modules/ngx_http_geo_module.o \
-objs/src/http/modules/ngx_http_map_module.o \
-objs/src/http/modules/ngx_http_split_clients_module.o \
-objs/src/http/modules/ngx_http_referer_module.o \
-objs/src/http/modules/ngx_http_rewrite_module.o \
-objs/src/http/modules/ngx_http_ssl_module.o \
-objs/src/http/modules/ngx_http_proxy_module.o \
-objs/src/http/modules/ngx_http_fastcgi_module.o \
-objs/src/http/modules/ngx_http_uwsgi_module.o \
-objs/src/http/modules/ngx_http_scgi_module.o \
-objs/src/http/modules/ngx_http_memcached_module.o \
-objs/src/http/modules/ngx_http_empty_gif_module.o \
-objs/src/http/modules/ngx_http_browser_module.o \
-objs/src/http/modules/ngx_http_secure_link_module.o \
-objs/src/http/modules/ngx_http_flv_module.o \
-objs/src/http/modules/ngx_http_mp4_module.o \
-objs/src/http/modules/ngx_http_upstream_hash_module.o \
-objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
-objs/src/http/modules/ngx_http_upstream_least_conn_module.o \
-objs/src/http/modules/ngx_http_upstream_keepalive_module.o \
-objs/src/http/modules/ngx_http_stub_status_module.o \
-objs/src/mail/ngx_mail.o \
-objs/src/mail/ngx_mail_core_module.o \
-objs/src/mail/ngx_mail_handler.o \
-objs/src/mail/ngx_mail_parse.o \
-objs/src/mail/ngx_mail_ssl_module.o \
-objs/src/mail/ngx_mail_pop3_module.o \
-objs/src/mail/ngx_mail_pop3_handler.o \
-objs/src/mail/ngx_mail_imap_module.o \
-objs/src/mail/ngx_mail_imap_handler.o \
-objs/src/mail/ngx_mail_smtp_module.o \
-objs/src/mail/ngx_mail_smtp_handler.o \
-objs/src/mail/ngx_mail_auth_http_module.o \
-objs/src/mail/ngx_mail_proxy_module.o \
-objs/ngx_modules.o \
--lpthread -lcrypt -lpcre -lssl -lcrypto -ldl -lz
-make[1]: Leaving directory '/usr/local/src/nginx-1.8.0'
-make -f objs/Makefile manpage
-make[1]: Entering directory '/usr/local/src/nginx-1.8.0'
-sed -e "s|%%PREFIX%%|/etc/nginx|" \
-	-e "s|%%PID_PATH%%|/var/run/nginx.pid|" \
-	-e "s|%%CONF_PATH%%|/etc/nginx/nginx.conf|" \
-	-e "s|%%ERROR_LOG_PATH%%|/var/log/nginx/error.log|" \
-	< man/nginx.8 > objs/nginx.8
-make[1]: Leaving directory '/usr/local/src/nginx-1.8.0'
-# sudo make install
-make -f objs/Makefile install
-make[1]: Entering directory '/usr/local/src/nginx-1.8.0'
-test -d '/etc/nginx' || mkdir -p '/etc/nginx'
-test -d '/usr/sbin' 		|| mkdir -p '/usr/sbin'
-test ! -f '/usr/sbin/nginx' 		|| mv '/usr/sbin/nginx' 			'/usr/sbin/nginx.old'
-cp objs/nginx '/usr/sbin/nginx'
-test -d '/etc/nginx' 		|| mkdir -p '/etc/nginx'
-cp conf/koi-win '/etc/nginx'
-cp conf/koi-utf '/etc/nginx'
-cp conf/win-utf '/etc/nginx'
-test -f '/etc/nginx/mime.types' 		|| cp conf/mime.types '/etc/nginx'
-cp conf/mime.types '/etc/nginx/mime.types.default'
-test -f '/etc/nginx/fastcgi_params' 		|| cp conf/fastcgi_params '/etc/nginx'
-cp conf/fastcgi_params 		'/etc/nginx/fastcgi_params.default'
-test -f '/etc/nginx/fastcgi.conf' 		|| cp conf/fastcgi.conf '/etc/nginx'
-cp conf/fastcgi.conf '/etc/nginx/fastcgi.conf.default'
-test -f '/etc/nginx/uwsgi_params' 		|| cp conf/uwsgi_params '/etc/nginx'
-cp conf/uwsgi_params 		'/etc/nginx/uwsgi_params.default'
-test -f '/etc/nginx/scgi_params' 		|| cp conf/scgi_params '/etc/nginx'
-cp conf/scgi_params 		'/etc/nginx/scgi_params.default'
-test -f '/etc/nginx/nginx.conf' 		|| cp conf/nginx.conf '/etc/nginx/nginx.conf'
-cp conf/nginx.conf '/etc/nginx/nginx.conf.default'
-test -d '/var/run' 		|| mkdir -p '/var/run'
-test -d '/var/log/nginx' || 		mkdir -p '/var/log/nginx'
-test -d '/etc/nginx/html' 		|| cp -R html '/etc/nginx'
-test -d '/var/log/nginx' || 		mkdir -p '/var/log/nginx'
-make[1]: Leaving directory '/usr/local/src/nginx-1.8.0'
-\end{lstlisting}
 
 
 Nginx 默认安装在/usr/local/nginx 目录中，可以通过\texttt{./configure --help}查看可选择的编译选项。
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 \begin{lstlisting}[language=bash]
 
@@ -5048,209 +4144,6 @@ Nginx 默认安装在/usr/local/nginx 目录中，可以通过\texttt{./configur
 
 
 \begin{compactitem}
-<<<<<<< HEAD
-\item --help
-输出 configure 配置信息。
-• --prefix=PATH 
-Nginx 安装路径默认为/usr/local/nginx.
-• --sbin-path=PATH16.1. OVERVIEW
-Nginx 可执行文件的默认安装路径为 <prefix>/sbin/nginx，只能安装时指定。
-• --conf-path=PATH
-nginx.conf 的默认路径为 <prefix>/conf/nginx.conf，可以使用-c 选项手动指定。
-• --error-log-path=PATH
-如果 nginx.conf 中没有指定 error_log，则默认的错误日志路径为 <prefix>/logs/error.log。
-• --pid-path=PATH
-如果 nginx.conf 中没有指定 pid，则默认的 nginx.pid 的路径为 <prefix>/logs/nginx.pid。
-• --lock-path=PATH
-设置 nginx.lock 文件的路径。
-• --user=USER
-如果 nginx.conf 中没 有指 定 user，则默认的 nginx worker 进程的非特权用户为nobody。
-• --group=GROUP
-如果 nginx.conf 中没有指定 user，则默认的 nginx worker 进程的非特权用户组为nobody。
-• --builddir=DIR
-指定 Nginx 的编译目录。
-• --with-rtsig_module
-启用 rtsig（实时信号）模块。
-• --with-select_module
-启用 SELECT 模块。如果 configure 没有指定更合适的模式（例如 kqueue、epoll、rtsig 或/dev/poll\footnote{/dev/poll 类似于 SELECT 模式，底层实现与 SELECT 基本相同，都是采用轮询方式。}，则将 SELECT 模式设置为默认安装模式。
-• --without-select_module
-禁用 SELECT 模块。
-• --with-poll_module
-启用 POLL 模块。
-• --without-poll_module
-禁用 POLL 模块。
-• --with-file-aio enable file AIO support
-• --with-ipv6 enable IPv6 support
-• --with-http_ssl_module
-启用 HTTP SSL 模块来使 Nginx 可以支持 HTTPS 请求，要求预先安装 OpenSSL或libssl（Debian）。
-• --with-http_spdy_module
-启用 ngx_http_spdy_module
-• --with-http_realip_module
-启用 ngx_http_realip_module
-• --with-http_addition_module
-启用 ngx_http_addition_module
-• --with-http_xslt_module
-启用 ngx_http_xslt_module
-• --with-http_image_filter_module
-启用 ngx_http_image_filter_module
-• --with-http_geoip_module
-启用 ngx_http_geoip_module
-• --with-http_sub_module
-启用 ngx_http_sub_module
-• --with-http_dav_module
-启用 ngx_http_dav_module
-• --with-http_flv_module
-启用 ngx_http_flv_module
-• --with-http_mp4_module
-启用 ngx_http_mp4_module
-• --with-http_gunzip_module
-启用 ngx_http_gunzip_module
-• --with-http_gzip_static_module
-启用 ngx_http_gzip_static_module，需要 zlib 支持。
-• --with-http_auth_request_module
-启用 ngx_http_auth_request_module
-• --with-http_random_index_module
-启用 ngx_http_random_index_module
-• --with-http_secure_link_module
-启用 ngx_http_secure_link_module
-• --with-http_degradation_module
-启用 ngx_http_degradation_module
-• --with-http_stub_status_module
-启用 ngx_http_stub_status_module
-• --without-http_charset_module
-禁用 ngx_http_charset_module
-• --without-http_gzip_module
-禁用 ngx_http_gzip_module
-• --without-http_ssi_module
-禁用 ngx_http_ssi_module
-• --without-http_userid_module
-禁用 ngx_http_userid_module
-• --without-http_access_module
-禁用 ngx_http_access_module
-• --without-http_auth_basic_module
-禁用 ngx_http_auth_basic_module
-• --without-http_autoindex_module
-禁用 ngx_http_autoindex_module
-• --without-http_geo_module
-禁用 ngx_http_geo_module
-• --without-http_map_module
-禁用 ngx_http_map_module
-• --without-http_split_clients_module
-禁用 ngx_http_split_clients_module
-• --without-http_referer_module
-禁用 ngx_http_referer_module
-• --without-http_rewrite_module
-禁用 ngx_http_rewrite_module
-• --without-http_proxy_module
-禁用 ngx_http_proxy_module
-• --without-http_fastcgi_module
-禁用 ngx_http_fastcgi_module
-• --without-http_uwsgi_module
-禁用 ngx_http_uwsgi_module
-• --without-http_scgi_module
-禁用 ngx_http_scgi_module
-• --without-http_memcached_module
-禁用 ngx_http_memcached_module
-• --without-http_limit_conn_module
-禁用 ngx_http_limit_conn_module
-• --without-http_limit_req_module
-禁用 ngx_http_limit_req_module
-• --without-http_empty_gif_module
-禁用 ngx_http_empty_gif_module
-• --without-http_browser_module
-禁用 ngx_http_browser_module
-• --without-http_upstream_ip_hash_module
-禁用 ngx_http_upstream_ip_hash_module
-• --without-http_upstream_least_conn_module
-禁用 ngx_http_upstream_least_conn_module
-• --without-http_upstream_keepalive_module
-禁用 ngx_http_upstream_keepalive_module
-• --with-http_perl_module
-启用 ngx_http_perl_module
-• --with-perl_modules_path=PATH
-指定 Perl 模块路径。
-• --with-perl=PATH
-指定 Perl 可执行文件路径。
-• --http-log-path=PATH
-如果 nginx.conf 中没有指定 access_log，则默认的 HTTP 访问日志的路径为 <prefix>/logs/access.log。
-• --http-client-body-temp-path=PATH
-指定保存 HTTP 客户端请求体缓存文件的路径。
-• --http-proxy-temp-path=PATH
-指定保存 HTTP 反向代理缓存文件的路径。
-• --http-fastcgi-temp-path=PATH
-指定保存 HTTP FastCGI 缓存文件的路径。
-• --http-uwsgi-temp-path=PATH
-指定保存 HTTP uwsgi 缓存文件的路径。
-• --http-scgi-temp-path=PATH
-指定保存HTTP scgi临时文件的路径。
-• --without-http
-禁用 HTTP 服务器。
-• --without-http-cache
-禁用 HTTP 缓存。
-• --with-mail
-启用 POP3/IMAP4/SMTP 代理模块。
-• --with-mail_ssl_module
-启用 ngx_mail_ssl_module
-• --without-mail_pop3_module
-禁用 ngx_mail_pop3_module
-• --without-mail_imap_module
-禁用 ngx_mail_imap_module
-• --without-mail_smtp_module
-禁用 ngx_mail_smtp_module
-• --with-google_perftools_module
-启用 ngx_google_perftools_module
-• --with-cpp_test_module
-启用 ngx_cpp_test_module
-• --add-module=PATH
-启用外部扩展模块，并添加在指定路径中能够找到的第三方模块。
-• --with-cc=PATH
-设置 C 语言编译器的路径。
-• --with-cpp=PATH
-设置 C 语言预处理器的路径。
-• --with-cc-opt=OPTIONS
-设置额外的 C 语言编译器选项。
-• --with-ld-opt=OPTIONS
-设置额外的链接器选项。
-• --with-cpu-opt=CPU
-为指定的 CPU 进行编译优化，有效值包括 pentium， pentiumpro， pentium3， pentium4，athlon， opteron， sparc32， sparc64 和 ppc64。
-• --without-pcre
-禁用 PCRE 库，同时也会禁用 HTTP rewrite 模块。在“location”配置指令中的正则表达式也需要 PCRE 库。
-• --with-pcre
-启用 PCRE 库。
-• --with-pcre=DIR
-指定 PCRE 库的源代码的路径。
-• --with-pcre-opt=OPTIONS
-指定额外的 PCRE 库的选项。
-• --with-pcre-jit
-为 PCRE 库启用 JIT 编译支持。
-• --with-md5=DIR
-设置 MD5 库的源代码的路径。
-• --with-md5-opt=OPTIONS
-设置 MD5 库的额外编译选项。
-• --with-md5-asm
-使用 MD5 汇编源码。
-• --with-sha1=DIR
-设置 SHA1 库的源代码路径。
-• --with-sha1-opt=OPTIONS
-设置 SHA1 库的额外编译选项。
-• --with-sha1-asm
-使用 SHA1 汇编源码。
-• --with-zlib=DIR
-设置 zlib 库的源代码路径。
-• --with-zlib-opt=OPTIONS
-设置 zlib 库的额外编译选项。
-• --with-zlib-asm=CPU
-针对指定 CPU 进行汇编优化，有效值包括 pentium， pentiumpro。
-• --with-libatomic
-启用 libatomic_ops 库。
-• --with-libatomic=DIR
-设置 libatomic_ops 库的源代码路径。
-• --with-openssl=DIR
-设置 OpenSSL 库的源代码路径。
-• --with-openssl-opt=OPTIONS
-设置 OpenSSL 库的额外编译选项。
-• --with-debug
-=======
 \item \texttt{--help}
 输出 configure 配置信息。
 \item \texttt{--prefix=PATH}
@@ -5455,12 +4348,11 @@ enable IPv6 support
 \item \texttt{--with-openssl-opt=OPTIONS}
 设置 OpenSSL 库的额外编译选项。
 \item \texttt{--with-debug}
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 启动调试日志。
 \end{compactitem}
 
 
-<<<<<<< HEAD
+
 下面是一个自定义编译选项的示例。
 
 \begin{lstlisting}[language=bash]
@@ -5481,10 +4373,6 @@ enable IPv6 support
 --http-proxy-temp-path=/var/tmp/nginx/proxy/ \
 --http-fastcgi-temp-path=/var/tmp/nginx/fcgi/
 \end{lstlisting}
-=======
-
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-
 
 一般情况下，在 HTTP 服务器中可以将相关的函数编译为模块，从而在客户端请求需要调用 PHP 程序时通过指定的 PHP 模块来实现相应的操作。
 
@@ -5492,16 +4380,10 @@ enable IPv6 support
 
 
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \begin{lstlisting}[language=bash]
 
 \end{lstlisting}
 
-<<<<<<< HEAD
 
 
 
@@ -5524,9 +4406,8 @@ enable IPv6 support
 
 
 
-\begin{lstlisting}[language=bash]
 
-=======
+
 \subsection{Management}
 
 
@@ -5568,15 +4449,9 @@ Nginx的停止操作可以通过多种方式实现，例如通过发送系统信
 
 \begin{lstlisting}[language=bash]
 # kill - 信号类型 `/var/run/nginx.pid`
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \end{lstlisting}
 
 
-
-<<<<<<< HEAD
-\begin{lstlisting}[language=bash]
-
-\end{lstlisting}
 
 
 
@@ -5893,6 +4768,12 @@ echo phpinfo();
 接下来，Nginx运行新的worker进程并从容关闭旧的worker进程。这里的从容关闭就是通知worker进程关闭监听套接字，但是继续为当前连接的客户提供服务，并且在所有客户端的请求完成后，完全关闭旧的worker进程。
 
 如果新的配置文件解析失败，那么Nginx继续使用原来的配置文件进行工作。
+
+
+
+
+
+
 
 
 实际上，Nginx支持的系统信号包括：
@@ -6218,7 +5099,7 @@ WantedBy=multi-user.targets
 \section{MySQL}
 
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 下载MySQL源代码，开始编译准备。
 
@@ -6352,8 +5233,6 @@ $ ./bin/mysql -u root -p
 > GRANT ALL ON test_db.* TO 'test'@localhost;
 \end{lstlisting}
 
-<<<<<<< HEAD
-=======
 实际上，为了保护MySQL的root用户，需要创建一个具有root权限的普通用户（这里是admin）。
 
 
@@ -6363,7 +5242,7 @@ $ ./bin/mysql -u root -p
 \end{lstlisting}
 
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 
 退出MySQL，并使用test账户再次登录MySQL
@@ -6414,8 +5293,7 @@ $ sudo chmod 755 lnmp.php
 
 
 
-<<<<<<< HEAD
-=======
+
 MySQL的配置文件的加载顺序依次为：
 
 \begin{compactitem}
@@ -6510,12 +5388,12 @@ max_allowed_packet=32M
 
 
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 \begin{lstlisting}[language=bash]
 
 \end{lstlisting}
 
-<<<<<<< HEAD
+
 Nginx的server块基本等同于Apache的virtual hosts，因此可以通过server块设置来开放/etc/nginx/conf.d/default.conf。
 
 默认情况下，Nginx只能处理静态网页，因此需要设置Nginx对PHP等动态网页的支持。
@@ -6555,7 +5433,6 @@ $ sudo systemctl restart nginx.service
 \end{lstlisting}
 
 
-=======
 
 \section{PHP}
 
@@ -6943,8 +5820,6 @@ fastcgi_param  PHP_ADMIN_VALUE "open_basedir=/var/www/htdocs";
 
 \end{lstlisting}
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
-
 
 
 \begin{lstlisting}[language=bash]
@@ -6954,7 +5829,6 @@ fastcgi_param  PHP_ADMIN_VALUE "open_basedir=/var/www/htdocs";
 
 
 
-<<<<<<< HEAD
 \begin{lstlisting}[language=bash]
 
 \end{lstlisting}
@@ -6991,7 +5865,7 @@ fastcgi_param  PHP_ADMIN_VALUE "open_basedir=/var/www/htdocs";
 
 
 
-=======
+
 
 
 根据生产环境还是开发环境，应该创建不同的php.ini。
@@ -7152,7 +6026,7 @@ echo phpinfo();
 
 在浏览器中访问http://127.0.0.1/index.php来测试PHP-FPM。
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 
 \begin{lstlisting}[language=bash]
@@ -7160,9 +6034,9 @@ echo phpinfo();
 \end{lstlisting}
 
 
-<<<<<<< HEAD
+
 \section{PHP}
-=======
+
 \subsection{eAccelerator}
 
 在安装eAccelerator后需要在php.ini中添加下面的配置项：
@@ -7191,7 +6065,7 @@ eaccelerator.compress_level="9"
 \subsection{Chroot}
 
 
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
+
 
 php-fpm中可以设立chroot，起到非常好的隔离效果，增强系统安全性。但是建立一个合理可用的php-fpm chroot环境则有些难度，比起能够利用debootstrap等工具进行的建立完整的chroot环境还要麻烦一点。
 
@@ -7204,11 +6078,6 @@ php-fpm中可以设立chroot，起到非常好的隔离效果，增强系统安�
 
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> d0778385719591c9fc4f1738f7b1b023363dde44
 \chapter{LTMP}
 
 
