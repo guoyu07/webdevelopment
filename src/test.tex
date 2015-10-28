@@ -1,1 +1,449 @@
 \part{Test}
+
+
+\chapter{Overview}
+
+
+
+
+
+\chapter{Server}
+
+
+
+
+\section{PHP}
+
+
+从PHP 5.4.0起，CLI SAPI提供了一个内置的Web服务器来用于本地开发使用，不可用于生产环境。
+
+默认情况下，URI请求会被发送到PHP所在的的工作目录（Working Directory）进行处理，除非使用\texttt{-t}参数来自定义不同的目录。
+
+如果请求未指定执行哪个PHP文件，则默认执行目录内的index.php 或者 index.html。如果这两个文件都不存在，服务器会返回404错误。
+
+
+在命令行启动内置的Web Server时，如果指定了一个PHP文件，则这个文件会作为一个“路由”脚本，意味着每次请求都会先执行这个脚本。如果这个脚本返回 FALSE ，那么直接返回请求的文件（例如请求静态文件不作任何处理），否则会把输出返回到浏览器。
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ php -S localhost:10086
+PHP 5.6.12 Development Server started at Sun Oct 25 21:51:18 2015
+Listening on http://localhost:10086
+Document root is /home/test/public_html
+Press Ctrl-C to quit.
+\end{lstlisting}
+
+
+如果需要在启动时指定Web根目录，可以执行：
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ php -S localhost:8000 -t foo/
+\end{lstlisting}
+
+
+下面的示例说明如何使用路由（router）脚本，请求图片直接显示图片，请求HTML则显示“Welcome to PHP”。
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ vim router.php
+<?php
+// router.php
+if (preg_match('/\.(?:png|jpg|jpeg|gif)$/', $_SERVER["REQUEST_URI"]))
+    return false;    // 直接返回请求的文件
+else { 
+    echo "<p>Welcome to PHP</p>";
+}
+?>
+$ $ php -S localhost:8000 router.php
+\end{lstlisting}
+
+PHP内置的Web服务器能识别一些标准的MIME类型资源，例如.css, .gif, .htm, .html, .jpe, .jpeg, .jpg, .js, .png, .svg和.txt等。
+
+对于不支持的文件类型，可以进行相应的判断和处理：
+
+
+
+通过程序判断是否是在使用内置Web服务器，从而调整同一个PHP路由器脚本在内置Web服务器中和在生产服务器中的不同行为：
+
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ vim router.php
+<?php
+// router.php
+if (php_sapi_name() == 'cli-server') {
+    /* route static assets and return false */
+}
+    /* go on with normal index.php operations */
+?>
+$ php -S localhost:10086 router.php
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ vim router.php
+<?php
+// router.php
+$path = pathinfo($_SERVER["SCRIPT_FILENAME"]);
+if($path["extension"]=="ogg"){
+	header("Content-Type: video/ogg");
+	readfile($_SERVER["SCRIPT_FILENAME"]);
+}else{
+	return FALSE;
+}
+?>
+$ php -S localhost:10086 router.php
+\end{lstlisting}
+
+如果需要开启服务器的远程访问支持，可以执行：
+
+\begin{lstlisting}[language=PHP]
+$ php -S 0.0.0.0:10086
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+
+
+
+
+\section{Python}
+
+
+Python自带的Web服务器SimpleHTTPServer可以使用下面的命令来启动（端口号默认为8000）：
+
+
+
+\begin{lstlisting}[language=PHP]
+python -m Web服务器模块 [端口号，默认8000]
+\end{lstlisting}
+
+
+这里的“Web服务器模块”有如下3种：
+
+\begin{compactitem}
+\item BaseHTTPServer: 提供基本的Web服务和处理器类，分别是HTTPServer和BaseHTTPRequestHandler。
+\item SimpleHTTPServer: 包含执行GET和HEAD请求的SimpleHTTPRequestHandler类。
+\item CGIHTTPServer: 包含处理POST请求和执行CGIHTTPRequestHandler类。
+\end{compactitem}
+
+\begin{lstlisting}[language=PHP]
+$ cd ~/public_html
+$ python -m SimpleHTTPServer 10086
+\end{lstlisting}
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+

@@ -154,6 +154,509 @@ Web浏览器实现的动态处理功能可以让浏览器在处理HTML或XML的�
 \end{compactitem}
 
 
+\section{Mechanism}
+
+
+\subsection{epoll}
+
+epoll is a Linux kernel system call, a scalable I/O event notification mechanism, first introduced in Linux kernel 2.5.44. It is meant to replace the older POSIX select(2) and poll(2) system calls, to achieve better performance in more demanding applications, where the number of watched file descriptors is large (unlike the older system calls, which operate in O(n) time, epoll operates in O(1) time). 
+
+epoll is similar to FreeBSD's kqueue, in that it operates on a configurable kernel object, exposed to user space as a file descriptor of its own.
+
+
+\begin{lstlisting}[language=PHP]
+int epoll_create1(int flags);
+\end{lstlisting}
+
+Creates an epoll object and returns its file descriptor. The flags parameter allows epoll behavior to be modified. It has only one valid value, EPOLL\_CLOEXEC. epoll\_create() is an older variant of epoll\_create1() and is deprecated as of Linux kernel version 2.6.27 and glibc version 2.9.
+
+
+
+
+\begin{lstlisting}[language=PHP]
+int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event);
+\end{lstlisting}
+
+Controls (configures) which file descriptors are watched by this object, and for which events. op can be ADD, MODIFY or DELETE.
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+int epoll_wait(int epfd, struct epoll_event *events, int maxevents, int timeout);
+\end{lstlisting}
+
+Waits for any of the events registered for with epoll_ctl, until at least one occurs or the timeout elapses. Returns the occurred events in events, up to maxevents at once.
+
+epoll provides both edge-triggered and level-triggered modes. In edge-triggered mode, a call to epoll\_wait will return only when a new event is enqueued with the epoll object, while in level-triggered mode, epoll\_wait will return as long as the condition holds.
+
+For instance, if a pipe, registered with epoll, has received data, a call to epoll\_wait will return, signaling the presence of data to be read. Suppose the reader only consumed part of data from the buffer. In level-triggered mode, further calls to epoll\_wait will return immediately, as long as the pipe's buffer contains data to be read. In edge-triggered mode, however, epoll\_wait will return only once new data is written to the pipe.
+
+
+
+\subsection{select}
+
+select is a system call and application programming interface (API) in Unix-like and POSIX-compliant operating systems for examining the status of file descriptors of open input/output channels. The select system call is similar to the poll facility introduced in UNIX System V and later operating systems.
+
+In the C programming language, the select system call is declared in the header file sys/select.h or unistd.h, and has the following syntax:
+
+\begin{lstlisting}[language=PHP]
+int select(int nfds, fd_set *readfds, fd_set *writefds, fd_set *errorfds, struct timeval *timeout);
+\end{lstlisting}
+
+
+
+\begin{longtable}{|m{40pt}|m{350pt}|}
+%head
+\multicolumn{2}{r}{}
+\tabularnewline\hline
+argument&description
+\endhead
+%endhead
+
+%firsthead
+\caption{select(UNIX)}\\
+\hline
+argument&description
+\endfirsthead
+%endfirsthead
+
+%foot
+\multicolumn{2}{r}{}
+\endfoot
+%endfoot
+
+%lastfoot
+\endlastfoot
+%endlastfoot
+
+\hline
+nfds	&This is an integer one more than the maximum of any file descriptor in any of the sets. In other words, while adding file descriptors to each of the sets, you must calculate the maximum integer value of all of them, then increment this value by one, and then pass this as nfds.\\
+\hline
+readfds&	fd\_set type holding the file descriptors to be checked for being ready to read, and on output indicates which file descriptors are ready to read. Can be NULL.\\
+\hline
+writefds&	fd\_set type holding the file descriptors to be checked for being ready to write, and on output indicates which file descriptors are ready to write. Can be NULL.\\
+\hline
+errorfds&	fd\_set type holding the file descriptors to be checked for error conditions pending, and on output indicates which file descriptors have error conditions pending. Can be NULL.\\
+\hline
+timeout&	structure of type struct timeval that specifies a maximum interval to wait for the selection to complete. If the timeout argument points to an object of type struct timeval whose members are 0, select() does not block. If the timeout argument is NULL, select() blocks until an event causes one of the masks to be returned with a valid (non-zero) value. Linux will update the timeout in place to indicate how much time was elapsed, though this behavior is not shared by most other Unix systems.\\
+\hline
+\end{longtable}
+
+fd\_set type arguments may be manipulated with four utility macros: FD\_SET(), FD\_CLR(), FD\_ZERO(), and FD\_ISSET().
+
+Select returns the total number of bits set in readfds, writefds and errorfds, or zero if the timeout expired, and -1 on error.
+
+The sets of file descriptor used in select are finite in size, depending on the operating system. The newer system call poll provides a more flexible solution.
+
+
+\begin{lstlisting}[language=PHP]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <netdb.h>
+
+#include <sys/select.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <err.h>
+#include <errno.h>
+
+#define PORT "9421"
+
+/* function prototypes */
+void die(const char*);
+
+int main(int argc, char **argv)
+{
+    int sockfd, new, maxfd, on = 1, nready, i;
+
+    struct addrinfo *res0, *res, hints;
+
+    char buffer[BUFSIZ];
+
+    fd_set master, readfds;
+
+    int error;
+
+    ssize_t nbytes;
+
+    (void)memset(&hints, '\0', sizeof(struct addrinfo));
+
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_protocol = IPPROTO_TCP;
+    hints.ai_flags = AI_PASSIVE;
+
+    if (0 != (error = getaddrinfo(NULL, PORT, &hints, &res0)))
+        errx(EXIT_FAILURE, "%s", gai_strerror(error));
+
+    for (res = res0; res; res = res->ai_next)
+    {
+        if (-1 == (sockfd = socket(res->ai_family, res->ai_socktype, res->ai_protocol)))
+        {
+            perror("socket()");
+            continue;
+        }
+
+        if (-1 == (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(int))))
+        {
+            perror("setsockopt()");
+            continue;
+        }
+
+        if (-1 == (bind(sockfd, res->ai_addr, res->ai_addrlen)))
+        {
+            perror("bind");
+            continue;
+        }
+
+        break;
+
+    }
+
+    if (-1 == sockfd)
+        exit(EXIT_FAILURE);
+
+    freeaddrinfo(res0);
+
+    if (-1 == (listen(sockfd, 32)))
+        die("listen()");
+
+    if (-1 == (fcntl(sockfd, F_SETFD, O_NONBLOCK)))
+        die("fcntl()");
+
+    FD_ZERO(&master);
+    FD_ZERO(&readfds);
+
+    FD_SET(sockfd, &master);
+
+    maxfd = sockfd;
+
+    while (1)
+    {
+        memcpy(&readfds, &master, sizeof(master));
+
+        (void)printf("running select()\n");
+
+        if (-1 == (nready = select(maxfd+1, &readfds, NULL, NULL, NULL)))
+            die("select()");
+
+        (void)printf("Number of ready descriptor: %d\n", nready);
+
+        for (i=0; i<=maxfd && nready>0; i++)
+        {
+            if (FD_ISSET(i, &readfds))
+            {
+                nready--;
+
+                if (i == sockfd)
+                {
+                    (void)printf("Trying to accept() new connection(s)\n");
+
+                    if (-1 == (new = accept(sockfd, NULL, NULL)))
+                    {
+                        if (EWOULDBLOCK != errno)
+                            die("accept()");
+
+                        break;
+                    }
+
+                    else
+                    {
+
+                        if (-1 == (fcntl(new, F_SETFD, O_NONBLOCK)))
+                            die("fcntl()");
+
+                        FD_SET(new, &master);
+
+                        if (maxfd < new)
+                            maxfd = new;
+                    }
+                }
+
+                else
+                {
+                    (void)printf("recv() data from one of descriptors(s)\n");
+
+                    nbytes = recv(i, buffer, sizeof(buffer), 0);
+                    if (nbytes <= 0)
+                    {
+                        if (EWOULDBLOCK != errno)
+                            die("recv()");
+
+                        break;
+                    }
+
+                    buffer[nbytes] = '\0';
+                    printf("%s", buffer);
+
+                    (void)printf("%zi bytes received.\n", nbytes);
+
+                    close(i);
+                    FD_CLR(i, &master);
+
+                }
+            }
+
+        }
+
+    }
+    return 0;
+}
+
+void die(const char *msg)
+{
+    perror(msg);
+    exit(EXIT_FAILURE);
+}
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+\subsection{kqueue}
+
+
+
+Kqueue is a scalable event notification interface introduced in FreeBSD 4.1, also supported in NetBSD, OpenBSD, DragonflyBSD, and OS X. Kqueue was originally authored in 2000 by Jonathan Lemon, then involved with the FreeBSD Core Team.
+
+Kqueue provides efficient input and output event pipelines between the kernel and userland. Thus, it is possible to modify event filters as well as receive pending events while using only a single system call to kevent(2) per main event loop iteration. This contrasts with older traditional polling system calls such as poll(2) and select(2) which are less efficient, especially when polling for events on a large number of file descriptors.
+
+Kqueue not only handles file descriptor events but is also used for various other notifications such as file modification monitoring, signals, asynchronous I/O events (AIO), child process state change monitoring and timers which support nanosecond resolution.
+
+Some other operating systems which traditionally only supported select(2) and poll(2) also currently provide more efficient polling alternatives, such as epoll on Linux and I/O Completion Ports on Windows and Solaris.
+
+Kqueue (or related techniques) provides the foundation for scalable event-driven I/O architectures such as Node.js in the web server space.
+
+The following is a telnet-like program that reads a message from standard input and then writes it to a network socket. At the same time, it reads from the other end of network socket and prints it out to the standard output.
+
+\begin{lstlisting}[language=PHP]
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+ 
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/event.h>
+#include <sys/time.h>
+#include <err.h>
+#include <errno.h>
+ 
+void die(const char*);
+int make_nonblocking(int);
+ 
+int main(int argc, char *argv[])
+{
+	int sockfd, nev, kq; 
+	struct addrinfo hints, *res, *res0; 
+	struct kevent change[2], event[2]; 
+	ssize_t nbytes;	
+	int error; 
+	char buf[BUFSIZ]; 
+	const char *cause = NULL;
+ 
+	if (3 != argc)
+	{
+		fprintf(stderr, "Usage: %s address port\n", argv[0]);
+		exit(EXIT_FAILURE);
+	}
+ 
+	(void)memset(&hints, '\0', sizeof(struct addrinfo));
+ 
+	hints.ai_family = AF_INET;
+	hints.ai_socktype = SOCK_STREAM;
+ 
+	if (0 != (error = getaddrinfo(argv[1], argv[2], &hints, &res0)))
+		errx(EXIT_FAILURE, "%s", gai_strerror(error));
+ 
+	sockfd = -1;
+ 
+	for (res = res0; res; res = res->ai_next)
+	{
+		if (-1 == (sockfd = socket(res->ai_family, res->ai_socktype,
+		 res->ai_protocol)))
+		{
+			cause = "socket";
+			continue;
+		}
+ 
+		if (-1 == connect(sockfd, res->ai_addr, res->ai_addrlen))
+		{
+			cause = "connect()";
+			close(sockfd);
+			sockfd = -1;
+			continue;
+		}
+
+		break;
+		/* NOTREACHED */
+ 
+	}
+ 
+	if (-1 == sockfd)
+		die(cause);
+		
+	freeaddrinfo(res0);
+ 
+	if (-1 == make_nonblocking(sockfd))
+		die("make_nonblock()");
+ 
+	if (-1 == make_nonblocking(STDIN_FILENO))
+		die("make_nonblock()");
+ 
+	if (-1 == (kq = kqueue()))
+		die("kqueue()");
+ 
+	EV_SET(&change[0], STDIN_FILENO, EVFILT_READ, EV_ADD | EV_ENABLE,0, 0, 0);
+	EV_SET(&change[1], sockfd, EVFILT_READ, EV_ADD | EV_ENABLE,0, 0, 0);
+	 
+	 if (-1 == kevent(kq, change, 2, NULL, 0, NULL))
+	 	die("kevent()");
+ 
+	for (;;)
+	{
+		printf("blocking in kevent()\n");
+		if (-1 == (nev = kevent(kq, NULL, 0, event, 2, NULL)))
+			die("kevent()");		
+		printf("kevent() returned %d\n", nev); 
+		
+		for (int i = 0; i < nev; i++)
+		{
+			if (event[i].ident == STDIN_FILENO)
+			{
+				fgets(buf, sizeof(buf), stdin);
+				nbytes = send(sockfd, buf, strlen(buf), 0);
+				if (-1 == nbytes)
+					if (EWOULDBLOCK != errno)
+						die("send()");
+ 
+			}
+			else
+			{
+				while ((nbytes = recv(sockfd, buf, sizeof(buf), 0)) > 0)
+				{					
+					if (nbytes != write(STDOUT_FILENO, buf, nbytes))
+					{
+						die("write()");
+					}
+				}
+ 
+				if (-1 == nbytes)
+				{
+					if (EWOULDBLOCK != errno)
+						die("recv()");
+				}
+				else if (EV_EOF & event[i].flags)
+				{
+					printf("the peer has closed the connection, exiting...\n");
+					exit(0);
+				}				
+			} 
+		} 
+	} 
+	return 0;
+}
+ 
+void die(const char *str)
+{
+	perror(str);
+	exit(EXIT_FAILURE);
+}
+
+int make_nonblocking(int fd)
+{
+	int flags;
+	if (-1 == (flags = fcntl(fd, F_GETFL)))
+		return -1;
+	
+	flags |= O_NONBLOCK;
+	
+	if (-1 == fcntl(fd, F_SETFL, flags))
+		return -1;
+	
+	return 0;	
+}
+\end{lstlisting}
+
+OS-independent libraries with good support for kqueue:
+
+\begin{compactitem}
+\item libevent
+\item libuv
+\end{compactitem}
+
+Kqueue equivalent for other platforms:
+
+\begin{compactitem}
+\item on Linux: epoll
+\item on Solaris, Windows and AIX: I/O Completion Ports
+\end{compactitem}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+\begin{lstlisting}[language=PHP]
+
+\end{lstlisting}
+
+
+
+
+
 \chapter{LAMP}
 
 
